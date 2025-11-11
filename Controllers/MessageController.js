@@ -1,27 +1,16 @@
-const { Message } = require("../Models/Message");
+import {MessagesModel} from '../models/messagesModel.js';
 
-const index = (req, res) => {
-  Message.find().then((data) => {
-    res.send(data).catch((e) => {
-      console.log(e);
-    });
-  });
+export const index = (req, res) => {
+  const messages = MessagesModel.getAll();
+  res.send(messages);
 };
 
-const store = (req, res) => {
-  const msg = new Message(req.body);
-  const io = req.app.get("socketio");
+export const store = (req, res) => {
+  const io = req.app.get('socketio');
 
-  msg.save((e) => {
-    if (e) {
-      sendStatus(500);
-    }
+  const {name, message} = req.body;
 
-    io.emit("message", req.body);
-    res.sendStatus(200);
-  });
-};
-module.exports = {
-  index,
-  store,
+  MessagesModel.create(name, message);
+  io.emit('message', req.body);
+  res.sendStatus(200);
 };
