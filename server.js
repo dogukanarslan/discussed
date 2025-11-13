@@ -20,7 +20,8 @@ var allowCrossDomain = function (req, res, next) {
 };
 
 // Middlewares
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/foo', express.static(path.join(__dirname, '/ui/dist')));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(allowCrossDomain);
