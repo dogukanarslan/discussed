@@ -10,7 +10,11 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const httpServer = http.createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:5173'
+  }
+});
 
 var allowCrossDomain = function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');

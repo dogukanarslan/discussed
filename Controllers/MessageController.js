@@ -1,7 +1,6 @@
 import {MessagesModel} from '../models/messagesModel.js';
 
 export const index = (req, res) => {
-  console.log('hi')
   const messages = MessagesModel.getAll();
   res.send(messages);
 };
@@ -11,7 +10,8 @@ export const store = (req, res) => {
 
   const {username, message} = req.body;
 
-  MessagesModel.create(username, message);
-  io.emit('message', req.body);
+  const response = MessagesModel.create(username, message);
+
+  io.emit('message', {id: response.id, ...req.body});
   res.sendStatus(200);
 };
