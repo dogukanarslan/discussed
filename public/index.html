@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat</title>
+    <title>Discussed</title>
+    <link rel="stylesheet" href="style.css" />
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-    <div>
-      <h1>Send Message</h1>
-      <form>
+    <div class="container">
+      <h1>Messages</h1>
+      <div id="message-list"></div>
+      <form class="message-form">
         <div>
           <label for="name">Username</label>
           <input id="name" type="text" placeholder="Username" />
@@ -18,19 +20,24 @@
 
         <div>
           <label for="message">Message</label>
-          <input id="message" type="text" placeholder="Message" />
+          <input
+            id="message"
+            type="text"
+            placeholder="Write something"
+            required
+          />
         </div>
 
-        <button>Send</button>
+        <button class="btn">Send</button>
       </form>
-      <div id="messages"></div>
     </div>
     <script>
       const socket = io();
 
       const $name = document.querySelector('#name');
       const $message = document.querySelector('#message');
-      const $messages = document.querySelector('#messages');
+      const $messages = document.querySelector('#message-list');
+      $messages.classList.add('message-list');
       const $form = document.querySelector('form');
 
       let messages = [];
@@ -46,18 +53,33 @@
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            name,
+            username: name,
             message
           })
         });
       });
+
+      const createMessageEl = (username, message) => {
+        console.log(username);
+        const $messageContainer = document.createElement('div');
+        $messageContainer.classList.add('message');
+        const $name = document.createElement('h4');
+        const $message = document.createElement('p');
+        $name.textContent = username;
+        $message.textContent = message;
+        $messageContainer.appendChild($name);
+        $messageContainer.appendChild($message);
+        return $messageContainer;
+      };
 
       const getMessages = () => {
         fetch(`/messages`)
           .then((res) => res.json())
           .then((data) => {
             data.forEach((message) => {
-              $messages.innerHTML += `<h4>${message.username}: </h4><p>${message.message}</p>`;
+              $messages.appendChild(
+                createMessageEl(message.username, message.message)
+              );
             });
           });
       };
@@ -65,8 +87,8 @@
       getMessages();
 
       socket.on('message', (data) => {
-        const {name, message} = data;
-        $messages.innerHTML += `<h4>${name}:</h4><p>${message}</p>`;
+        console.log(data)
+        $messages.appendChild(createMessageEl(data.username, data.message));
       });
     </script>
   </body>
