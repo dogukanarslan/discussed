@@ -1,29 +1,29 @@
-import {useState} from 'react';
+import { useState } from "react";
 
 export const MessageForm = () => {
-  const [msg, setMsg] = useState('');
+  const [msg, setMsg] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const username = sessionStorage.getItem('username');
+    const username = sessionStorage.getItem("username");
 
     fetch(`/api/messages`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username,
-        message: msg
-      })
+        message: msg,
+      }),
     }).then(() => {
-      setMsg('');
+      setMsg("");
     });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="message-form" onSubmit={handleSubmit}>
       <div className="message-box">
         <input
           className="message-input"

@@ -1,15 +1,15 @@
-import {useState} from 'react';
-import {MessageForm} from './MessageForm';
+import { useState } from "react";
+import { MessageForm } from "./MessageForm";
 
-import {MessageList} from './MessageList';
+import { MessageList } from "./MessageList";
 
-import {Login} from './Login';
+import { Login } from "./Login";
 
-import 'http://localhost:8080/socket.io/socket.io.js';
+import "http://localhost:8080/socket.io/socket.io.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    !!sessionStorage.getItem('username')
+    !!sessionStorage.getItem("username")
   );
 
   if (!isLoggedIn) {
@@ -18,6 +18,7 @@ function App() {
 
   return (
     <div className="container">
+      <h1 className="messages-heading">Messages</h1>
       <MessageList />
       <MessageForm />
     </div>

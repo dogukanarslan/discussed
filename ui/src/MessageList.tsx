@@ -29,7 +29,6 @@ export const MessageList = () => {
 
   return (
     <div className="message-list">
-      <h1>Messages</h1>
       {msgs.map((msg) => (
         <Message key={msg.id} message={msg.message} username={msg.username} />
       ))}
