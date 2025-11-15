@@ -1,40 +1,24 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {MessageForm} from './MessageForm';
 
 import {MessageList} from './MessageList';
 
+import {Login} from './Login';
+
 import 'http://localhost:8080/socket.io/socket.io.js';
 
-type TMsg = {id: number; username: string; message: string};
-
 function App() {
-  const [msgs, setMsgs] = useState<TMsg[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!sessionStorage.getItem('username')
+  );
 
-  useEffect(() => {
-    fetch(`/api/messages`)
-      .then((res) => res.json())
-      .then((data) => {
-        setMsgs(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (typeof window.io === 'function') {
-      const socket = window.io('http://localhost:8080/');
-      socket.on('message', (data: TMsg) => {
-        setMsgs((prev) => [...prev, data]);
-      });
-
-      return () => {
-        socket.off('message');
-      };
-    }
-  }, []);
+  if (!isLoggedIn) {
+    return <Login setIsLoggedIn={setIsLoggedIn} />;
+  }
 
   return (
     <div className="container">
-      <h1>Messages</h1>
-      <MessageList messages={msgs} />
+      <MessageList />
       <MessageForm />
     </div>
   );

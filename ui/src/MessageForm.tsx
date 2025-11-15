@@ -1,11 +1,12 @@
 import {useState} from 'react';
 
 export const MessageForm = () => {
-  const [username, setUsername] = useState('');
   const [msg, setMsg] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const username = sessionStorage.getItem('username');
 
     fetch(`/api/messages`, {
       method: 'POST',
@@ -16,28 +17,23 @@ export const MessageForm = () => {
         username,
         message: msg
       })
+    }).then(() => {
+      setMsg('');
     });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">Username</label>
+      <div className="message-box">
         <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="message">Message</label>
-        <input
+          className="message-input"
           type="text"
           value={msg}
           onChange={(e) => setMsg(e.target.value)}
+          placeholder="Write something"
         />
+        <button className="message-button">Send</button>
       </div>
-      <button>Send</button>
     </form>
   );
 };

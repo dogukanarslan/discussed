@@ -6,6 +6,8 @@ html {
 
 body {
   margin: 0;
+  background-color: #1a1a1a;
+  color: #f2f2f2;
 }
 
 h1,
@@ -21,12 +23,48 @@ h6 {
 }
 
 .message {
-  border: 1px solid tomato;
+  background-color: #fefefe;
+  color: tomato;
   border-radius: 6px;
   padding: 12px;
   width: 40%;
 }
 
+.message-right {
+  margin-left: auto;
+  background-color: tomato;
+  color: #f2f2f2;
+}
+
 .message + .message {
   margin-top: 6px;
+}
+
+.message-box {
+  margin-top: 20px;
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.message-input {
+  font-size: 15px;
+  width: 100%;
+  padding: 10px 14px;
+}
+
+.login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__form {
+  padding: 50px 100px;
+  border-radius: 5px;
+}
+
+.login__heading {
+  text-align: center;
 }
