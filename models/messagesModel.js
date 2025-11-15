@@ -1,8 +1,11 @@
 import { database } from "../db/db.js";
 
 export const MessagesModel = {
+  get(msgId) {
+    return database.prepare("SELECT m.id, m.message, m.created_at, u.username FROM messages m JOIN users u ON m.user_id = u.id WHERE m.id = ?").get(msgId);
+  },
   getAll() {
-    return database.prepare("SELECT * FROM messages").all();
+    return database.prepare("SELECT m.id, m.message, m.created_at, u.username FROM messages m JOIN users u ON m.user_id = u.id").all();
   },
   create(user_id, message) {
     const stmt = database.prepare(

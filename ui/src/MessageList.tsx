@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Message} from './Message';
 
-type TMsg = {id: number; user_id: number; message: string};
+type TMsg = {id: number; username: string; message: string};
 
 export const MessageList = () => {
   const [msgs, setMsgs] = useState<TMsg[]>([]);
@@ -30,7 +30,7 @@ export const MessageList = () => {
   return (
     <div className="message-list">
       {msgs.map((msg) => (
-        <Message key={msg.id} message={msg.message} userId={msg.user_id} />
+        <Message key={msg.id} message={msg} />
       ))}
     </div>
   );

@@ -11,7 +11,8 @@ export const store = (req, res) => {
   const {user_id, message} = req.body;
 
   const response = MessagesModel.create(user_id, message);
+  const msg = MessagesModel.get(response.id)
 
-  io.emit('message', {id: response.id, ...req.body});
+  io.emit('message', msg);
   res.sendStatus(200);
 };
