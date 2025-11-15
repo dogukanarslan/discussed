@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {Server} from 'socket.io';
 import {router as MessageRoute} from './routes/messagesRoute.js';
+import {router as AuthRoute} from './routes/authRoute.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,6 +34,7 @@ app.use(allowCrossDomain);
 app.set('socketio', io);
 
 app.use('/messages', MessageRoute);
+app.use('/', AuthRoute);
 
 const server = httpServer.listen(process.env.PORT || 3000, () => {
   console.log('server is runnning on port ', server.address().port);

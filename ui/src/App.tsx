@@ -6,14 +6,20 @@ import { MessageList } from "./MessageList";
 import { Login } from "./Login";
 
 import "http://localhost:8080/socket.io/socket.io.js";
+import { SignUp } from "./SignUp";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    !!sessionStorage.getItem("username")
+    !!sessionStorage.getItem("user")
   );
+  const [isSignUp, setIsSignUp] = useState(false);
+
+  if (isSignUp) {
+    return <SignUp setIsLoggedIn={setIsLoggedIn} setIsSignUp={setIsSignUp} />;
+  }
 
   if (!isLoggedIn) {
-    return <Login setIsLoggedIn={setIsLoggedIn} />;
+    return <Login setIsLoggedIn={setIsLoggedIn} setIsSignUp={setIsSignUp} />;
   }
 
   return (

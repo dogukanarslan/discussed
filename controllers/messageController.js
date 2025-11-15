@@ -8,9 +8,9 @@ export const index = (req, res) => {
 export const store = (req, res) => {
   const io = req.app.get('socketio');
 
-  const {username, message} = req.body;
+  const {user_id, message} = req.body;
 
-  const response = MessagesModel.create(username, message);
+  const response = MessagesModel.create(user_id, message);
 
   io.emit('message', {id: response.id, ...req.body});
   res.sendStatus(200);

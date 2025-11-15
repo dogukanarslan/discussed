@@ -5,7 +5,7 @@ interface Props {
   setIsSignUp: (isSignUp: boolean) => void;
 }
 
-export const Login = (props: Props) => {
+export const SignUp = (props: Props) => {
   const { setIsLoggedIn, setIsSignUp } = props;
 
   const [username, setUsername] = useState("");
@@ -16,24 +16,25 @@ export const Login = (props: Props) => {
 
     const body = { username, password };
 
-    fetch("/api/signin", {
+    fetch("/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        sessionStorage.setItem("user", JSON.stringify(data));
+    }).then((res) => {
+      if (res.ok) {
+        sessionStorage.setItem("username", JSON.stringify(username));
         setIsLoggedIn(true);
-      });
+        setIsSignUp(false);
+      }
+    });
   };
 
   return (
     <div className="login">
       <form className="login__form" onSubmit={handleSubmit}>
-        <h1 className="login__heading">Login</h1>
+        <h1 className="login__heading">Sign up</h1>
         <div>
           <label htmlFor="username"></label>
           <input
@@ -54,8 +55,7 @@ export const Login = (props: Props) => {
             placeholder="Enter password"
           />
         </div>
-        <button>Log in</button>
-        <button onClick={() => setIsSignUp(true)}>Sign up</button>
+        <button>Sign up</button>
       </form>
     </div>
   );

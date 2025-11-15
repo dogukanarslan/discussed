@@ -1,20 +1,18 @@
 interface Props {
   message: string;
-  username: string;
+  userId: number;
 }
 
 export const Message = (props: Props) => {
-  const {message, username} = props;
+  const { message, userId } = props;
 
-  const currentUsername = sessionStorage.getItem('username');
+  const currentUser = JSON.parse(sessionStorage.getItem("user") || '""');
 
   return (
     <div
-      className={`message ${
-        username === currentUsername ? 'message-right' : ''
-      }`}
+      className={`message ${userId === currentUser.id ? "message-right" : ""}`}
     >
-      <h4>{username}</h4>
+      <h4>{currentUser.username}</h4>
       <p>{message}</p>
     </div>
   );

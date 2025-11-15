@@ -6,7 +6,11 @@ export const MessageForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const username = sessionStorage.getItem("username");
+    let user = JSON.parse(sessionStorage.getItem("user") || '""');
+
+    if (!user) {
+      return;
+    }
 
     fetch(`/api/messages`, {
       method: "POST",
@@ -14,7 +18,7 @@ export const MessageForm = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username,
+        user_id: user.id,
         message: msg,
       }),
     }).then(() => {

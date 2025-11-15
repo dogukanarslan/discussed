@@ -13,5 +13,5 @@ const schema = fs.readFileSync(schemaPath, 'utf-8');
 database.exec(schema);
 
 export const createMessage = database.prepare(
-  'INSERT INTO messages (username, message) VALUES (?, ?)'
+  'INSERT INTO messages (user_id, message) VALUES (?, ?)'
 );
