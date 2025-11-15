@@ -22,13 +22,17 @@ export const SignUp = (props: Props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
-    }).then((res) => {
-      if (res.ok) {
-        sessionStorage.setItem("username", JSON.stringify(username));
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        sessionStorage.setItem("user", JSON.stringify(data));
         setIsLoggedIn(true);
         setIsSignUp(false);
-      }
-    });
+      });
   };
 
   return (

@@ -4,7 +4,11 @@ export const signin = (req, res) => {
   const { username, password } = req.body;
   const user = UserModel.get(username);
   if (user) {
-    res.status(200).json({ id: user.id, username: user.username });
+    if (user.password !== password) {
+      res.status(500).json({ error: "Invalid credentials" });
+    } else {
+      res.status(200).json({ id: user.id, username: user.username });
+    }
   } else {
     res.status(404).text("User not found");
   }

@@ -23,7 +23,15 @@ export const Login = (props: Props) => {
       },
       body: JSON.stringify(body),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          setUsername('');
+          setPassword('');
+          throw 'Invalid Credentials'
+        }
+      })
       .then((data) => {
         sessionStorage.setItem("user", JSON.stringify(data));
         setIsLoggedIn(true);
@@ -41,7 +49,8 @@ export const Login = (props: Props) => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter userneme"
+            placeholder="Enter username"
+            required
           />
         </div>
         <div>
@@ -52,6 +61,7 @@ export const Login = (props: Props) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
+            required
           />
         </div>
         <button>Log in</button>
