@@ -10,9 +10,11 @@ export const SignIn = (props: Props) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError("");
 
     const body = { username, password };
 
@@ -23,25 +25,29 @@ export const SignIn = (props: Props) => {
       },
       body: JSON.stringify(body),
     })
-      .then((res) => {
+      .then(async (res) => {
         if (res.ok) {
           return res.json();
         } else {
-          setUsername('');
-          setPassword('');
-          throw 'Invalid Credentials'
+          const data = await res.json();
+          throw Error(data.error);
         }
       })
       .then((data) => {
         sessionStorage.setItem("user", JSON.stringify(data));
         setIsLoggedIn(true);
+      })
+      .catch((e) => {
+        setUsername("");
+        setPassword("");
+        setError(e.message);
       });
   };
 
   return (
     <div className="login">
       <form className="login__form" onSubmit={handleSubmit}>
-        <h1 className="login__heading">Login</h1>
+        <h1 className="login__heading">Sign in</h1>
         <div>
           <label htmlFor="username"></label>
           <input
@@ -64,6 +70,7 @@ export const SignIn = (props: Props) => {
             required
           />
         </div>
+        {error && <div className="error">{error}</div>}
         <button>Log in</button>
         <button onClick={() => setIsSignUp(true)}>Sign up</button>
       </form>
