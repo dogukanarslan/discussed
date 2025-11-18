@@ -3,7 +3,7 @@ import { MessageForm } from "./MessageForm";
 
 import { MessageList } from "./MessageList";
 
-import { Login } from "./Login";
+import { SignIn } from "./SignIn";
 
 import "http://localhost:8080/socket.io/socket.io.js";
 import { SignUp } from "./SignUp";
@@ -19,7 +19,7 @@ function App() {
   }
 
   if (!isLoggedIn) {
-    return <Login setIsLoggedIn={setIsLoggedIn} setIsSignUp={setIsSignUp} />;
+    return <SignIn setIsLoggedIn={setIsLoggedIn} setIsSignUp={setIsSignUp} />;
   }
 
   return (

@@ -93,3 +93,7 @@ h6 {
 .login__heading {
   text-align: center;
 }
+
+.error {
+  color: red;
+}

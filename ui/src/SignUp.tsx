@@ -10,9 +10,11 @@ export const SignUp = (props: Props) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError("");
 
     const body = { username, password };
 
@@ -37,7 +39,9 @@ export const SignUp = (props: Props) => {
         setIsSignUp(false);
       })
       .catch((e) => {
-        alert(e);
+        setError(e.message);
+        setUsername("");
+        setPassword("");
       });
   };
 
@@ -65,6 +69,7 @@ export const SignUp = (props: Props) => {
             placeholder="Enter password"
           />
         </div>
+        {error && <div className="error">{error}</div>}
         <button>Sign up</button>
       </form>
     </div>

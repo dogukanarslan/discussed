@@ -5,7 +5,7 @@ interface Props {
   setIsSignUp: (isSignUp: boolean) => void;
 }
 
-export const Login = (props: Props) => {
+export const SignIn = (props: Props) => {
   const { setIsLoggedIn, setIsSignUp } = props;
 
   const [username, setUsername] = useState("");
