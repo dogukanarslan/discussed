@@ -23,15 +23,21 @@ export const SignUp = (props: Props) => {
       },
       body: JSON.stringify(body),
     })
-      .then((res) => {
+      .then(async (res) => {
         if (res.ok) {
           return res.json();
+        } else {
+          const data = await res.json();
+          throw Error(data.error);
         }
       })
       .then((data) => {
         sessionStorage.setItem("user", JSON.stringify(data));
         setIsLoggedIn(true);
         setIsSignUp(false);
+      })
+      .catch((e) => {
+        alert(e);
       });
   };
 

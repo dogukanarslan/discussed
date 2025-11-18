@@ -10,7 +10,7 @@ export const signin = (req, res) => {
       res.status(200).json({ id: user.id, username: user.username });
     }
   } else {
-    res.status(404).json({error: "User not found"});
+    res.status(404).json({ error: "User not found" });
   }
 };
 
@@ -24,7 +24,6 @@ export const signup = (req, res) => {
       res.status(200).json({ id: user.id, username: user.username });
     }
   } catch (e) {
-    console.log(e.message);
-    res.sendStatus(500);
+    res.status(500).json({ error: e.message });
   }
 };
