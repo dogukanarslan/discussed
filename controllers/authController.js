@@ -1,29 +1,38 @@
 import { UserModel } from "../models/userModel.js";
 
-export const signin = (req, res) => {
+export const signin = (req, res, next) => {
   const { username, password } = req.body;
-  const user = UserModel.get(username);
-  if (user) {
-    if (user.password !== password) {
-      res.status(500).json({ error: "Invalid credentials" });
-    } else {
-      res.status(200).json({ id: user.id, username: user.username });
+  try {
+    if (!username || !password) {
+      return next({ status: 400, message: "Username and password required" });
     }
-  } else {
-    res.status(404).json({ error: "User not found" });
+
+    const user = UserModel.get(username);
+    if (!user) {
+      return next({ status: 404, message: "User not found" });
+    }
+
+    if (user.password !== password) {
+      return next({ status: 401, message: "Invalid credentials" });
+    }
+    return res.status(200).json({ id: user.id, username: user.username });
+  } catch (e) {
+    next(e);
   }
 };
 
-export const signup = (req, res) => {
-  const { username, password } = req.body;
-
+export const signup = (req, res, next) => {
   try {
-    const user = UserModel.create(username, password);
-    if (user) {
-      const user = UserModel.get(username);
-      res.status(200).json({ id: user.id, username: user.username });
-    }
+    const { username, password } = req.body;
+
+    UserModel.create(username, password);
+    const user = UserModel.get(username);
+    res.status(201).json({ id: user.id, username: user.username });
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    if (e.errcode === 2067) {
+      return next({ status: 409, message: "Username already exists" });
+    }
+
+    return next(e);
   }
 };
