@@ -28,14 +28,30 @@ h6 {
   margin: 0;
 }
 
+button {
+  border-style: solid;
+  padding: 5px;
+  border-radius: 5px;
+  border-color: transparent
+}
 
-.messages-heading {
-  height: var(--messages-heading-height);
+button+button {
+  margin-left: 5px;
+}
+
+input {
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .container {
   height: 100vh;
   padding: 0 16px;
+}
+
+/* Messages */
+.messages-heading {
+  height: var(--messages-heading-height);
 }
 
 .message-list {
@@ -78,6 +94,7 @@ h6 {
   padding: 10px;
 }
 
+/* Sign in */
 .login {
   height: 100vh;
   display: flex;
@@ -88,6 +105,11 @@ h6 {
 .login__form {
   padding: 50px 100px;
   border-radius: 5px;
+  border: 1px solid red;
+}
+
+.login__form>*+* {
+  margin-top: 5px;
 }
 
 .login__heading {
