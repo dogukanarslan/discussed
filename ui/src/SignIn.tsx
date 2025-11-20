@@ -30,7 +30,7 @@ export const SignIn = (props: Props) => {
           return res.json();
         } else {
           const data = await res.json();
-          throw Error(data.error);
+          throw Error(data.message);
         }
       })
       .then((data) => {
@@ -71,7 +71,7 @@ export const SignIn = (props: Props) => {
           />
         </div>
         {error && <div className="error">{error}</div>}
-        <button>Log in</button>
+        <button>Sign in</button>
         <button onClick={() => setIsSignUp(true)}>Sign up</button>
       </form>
     </div>

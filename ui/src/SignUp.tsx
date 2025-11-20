@@ -30,7 +30,7 @@ export const SignUp = (props: Props) => {
           return res.json();
         } else {
           const data = await res.json();
-          throw Error(data.error);
+          throw Error(data.message);
         }
       })
       .then((data) => {
