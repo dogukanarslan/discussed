@@ -25,6 +25,13 @@ export const signup = (req, res, next) => {
   try {
     const { username, password } = req.body;
 
+    if (!username || !password) {
+      return next({
+        status: 400,
+        message: "Username and password is required",
+      });
+    }
+
     UserModel.create(username, password);
     const user = UserModel.get(username);
     res.status(201).json({ id: user.id, username: user.username });
