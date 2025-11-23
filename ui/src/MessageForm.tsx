@@ -28,16 +28,14 @@ export const MessageForm = () => {
 
   return (
     <form className="message-form" onSubmit={handleSubmit}>
-      <div className="message-box">
-        <input
-          className="message-input"
-          type="text"
-          value={msg}
-          onChange={(e) => setMsg(e.target.value)}
-          placeholder="Write something"
-        />
-        <button className="message-button">Send</button>
-      </div>
+      <input
+        className="message-input"
+        type="text"
+        value={msg}
+        onChange={(e) => setMsg(e.target.value)}
+        placeholder="Write something"
+      />
+      <button className="message-button">Send</button>
     </form>
   );
 };

@@ -22,9 +22,17 @@ function App() {
     return <SignIn setIsLoggedIn={setIsLoggedIn} setIsSignUp={setIsSignUp} />;
   }
 
+  const handleSignout = () => {
+    setIsLoggedIn(false);
+    sessionStorage.removeItem("user");
+  };
+
   return (
     <div className="container">
-      <h1 className="messages-heading">Messages</h1>
+      <div className="header">
+        <h1 className="header__heading">Messages</h1>
+        <button onClick={handleSignout}>Sign out</button>
+      </div>
       <MessageList />
       <MessageForm />
     </div>
