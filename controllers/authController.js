@@ -1,4 +1,5 @@
 import { UserModel } from "../models/userModel.js";
+import bcrypt from "bcrypt";
 
 export const signin = (req, res, next) => {
   const { username, password } = req.body;
@@ -12,7 +13,7 @@ export const signin = (req, res, next) => {
       return next({ status: 404, message: "User not found" });
     }
 
-    if (user.password !== password) {
+    if (bcrypt.compareSync(user.password, password)) {
       return next({ status: 401, message: "Invalid credentials" });
     }
     return res.status(200).json({ id: user.id, username: user.username });
@@ -31,8 +32,9 @@ export const signup = (req, res, next) => {
         message: "Username and password is required",
       });
     }
-
-    UserModel.create(username, password);
+    const saltRounds = 10;
+    let hashedPassword = bcrypt.hashSync(password, saltRounds);
+    UserModel.create(username, hashedPassword);
     const user = UserModel.get(username);
     res.status(201).json({ id: user.id, username: user.username });
   } catch (e) {
