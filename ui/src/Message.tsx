@@ -6,6 +6,9 @@ export const Message = (props: Props) => {
   const { message } = props;
 
   const currentUser = JSON.parse(sessionStorage.getItem("user") || '""');
+  const time = `${new Date(message.created_at)
+    .getHours()
+    .toString()}:${new Date(message.created_at).getMinutes().toString()}`;
 
   return (
     <div
@@ -15,7 +18,7 @@ export const Message = (props: Props) => {
     >
       <h4>{message.username}</h4>
       <p>{message.message}</p>
-      <p>{message.created_at}</p>
+      <p>{time}</p>
     </div>
   );
 };
