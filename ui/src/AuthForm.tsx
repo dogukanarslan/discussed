@@ -1,38 +1,41 @@
 import { useState } from "react";
 
-export const SignIn = () => {
+interface Props {
+  endpoint: string;
+  title: string;
+  buttonText: string;
+  link: { href: string; text: string };
+}
+
+export const AuthForm = (props: Props) => {
+  const { title, buttonText, endpoint, link } = props;
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e:React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    const body = { username, password };
-
-    fetch("/api/signin", {
+    fetch(endpoint, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
     })
       .then(async (res) => {
         if (res.ok) {
           return res.json();
-        } else {
-          const data = await res.json();
-          throw Error(data.message);
         }
+
+        const data = await res.json();
+        throw Error(data.message);
       })
-      .then((data) => {
-        sessionStorage.setItem("user", JSON.stringify(data));
-      })
+      .then((data) => sessionStorage.setItem("user", JSON.stringify(data)))
       .catch((e) => {
+        setError(e.message);
         setUsername("");
         setPassword("");
-        setError(e.message);
       });
   };
 
@@ -40,18 +43,19 @@ export const SignIn = () => {
     <div className="login">
       <div className="login__form">
         <form onSubmit={handleSubmit}>
-          <h1 className="login__heading">Sign in</h1>
+          <h1 className="login__heading">{title}</h1>
+
           <div>
             <label htmlFor="username"></label>
             <input
               id="username"
-              type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter username"
               required
             />
           </div>
+
           <div>
             <label htmlFor="password"></label>
             <input
@@ -63,10 +67,12 @@ export const SignIn = () => {
               required
             />
           </div>
+
           {error && <div className="error">{error}</div>}
-          <button>Sign in</button>
+          <button>{buttonText}</button>
         </form>
-        <a href="#signup">Create new account</a>
+
+        <a href={link.href}>{link.text}</a>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MessageForm } from "./MessageForm";
 
 import { MessageList } from "./MessageList";
@@ -9,23 +9,40 @@ import "http://localhost:8080/socket.io/socket.io.js";
 import { SignUp } from "./SignUp";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!sessionStorage.getItem("user")
-  );
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [route, setRoute] = useState(window.location.hash);
+  const user = sessionStorage.getItem("user");
 
-  if (isSignUp) {
-    return <SignUp setIsLoggedIn={setIsLoggedIn} setIsSignUp={setIsSignUp} />;
-  }
+  useEffect(() => {
+    const onHashChange = () => setRoute(window.location.hash);
+    window.addEventListener("hashchange", onHashChange);
 
-  if (!isLoggedIn) {
-    return <SignIn setIsLoggedIn={setIsLoggedIn} setIsSignUp={setIsSignUp} />;
-  }
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+    };
+  }, []);
+
+  // Redirect if user is not logged in
+  useEffect(() => {
+    if (!user && route !== "#signin" && route !== "#signup") {
+      window.location.hash = "#signin";
+    }
+  }, [user, route]);
 
   const handleSignout = () => {
-    setIsLoggedIn(false);
     sessionStorage.removeItem("user");
   };
+
+  if (route === "#signin") {
+    return <SignIn />;
+  }
+
+  if (route === "#signup") {
+    return <SignUp />;
+  }
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="container">
