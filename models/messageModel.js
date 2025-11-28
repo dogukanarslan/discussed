@@ -1,6 +1,6 @@
 import { database } from "../db/db.js";
 
-export const MessagesModel = {
+export const MessageModel = {
   get(msgId) {
     try {
       return database
