@@ -14,7 +14,7 @@ export const AuthForm = (props: Props) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e:React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -31,7 +31,10 @@ export const AuthForm = (props: Props) => {
         const data = await res.json();
         throw Error(data.message);
       })
-      .then((data) => sessionStorage.setItem("user", JSON.stringify(data)))
+      .then((data) => {
+        sessionStorage.setItem("user", JSON.stringify(data));
+        window.location.hash = "#";
+      })
       .catch((e) => {
         setError(e.message);
         setUsername("");
