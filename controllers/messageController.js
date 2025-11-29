@@ -1,18 +1,24 @@
-import { MessageModel } from "../models/messageModel.js";
+import { MessageService } from "../services/MessageService.js";
 
 export const index = (req, res) => {
-  const messages = MessageModel.getAll();
-  res.send(messages);
+  try {
+    const messages = MessageService.getAll();
+    res.send(messages);
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
 };
 
 export const store = (req, res) => {
-  const io = req.app.get("socketio");
+  try {
+    const io = req.app.get("socketio");
 
-  const { user_id, message } = req.body;
+    const { user_id, message } = req.body;
+    const msg = MessageService.create({ user_id, message });
 
-  const response = MessageModel.create(user_id, message);
-  const msg = MessageModel.get(response.id);
-
-  io.emit("message", msg);
-  res.sendStatus(200);
+    io.emit("message", msg);
+    res.sendStatus(201);
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 };
