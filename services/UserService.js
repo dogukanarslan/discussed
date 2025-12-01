@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { UserModel } from "../models/userModel.js";
 
 export const UserService = {
@@ -20,7 +21,9 @@ export const UserService = {
         throw { status: 400, message: "Invalid credentials" };
       }
 
-      return { id: user.id, username: user.username };
+      const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+      return { id: user.id, username: user.username, token };
     } catch (e) {
       throw Error(e.message);
     }
@@ -34,6 +37,7 @@ export const UserService = {
     let hashedPassword = bcrypt.hashSync(password, saltRounds);
     UserModel.create(username, hashedPassword);
     const user = UserModel.get(username);
-    return user;
+    const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" });
+    return { ...user, token };
   },
 };

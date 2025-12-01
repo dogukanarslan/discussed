@@ -26,10 +26,11 @@ function App() {
     if (!user && route !== "#signin" && route !== "#signup") {
       window.location.hash = "#signin";
     }
-  }, [user, route]);
+  }, [route, user]);
 
   const handleSignout = () => {
     sessionStorage.removeItem("user");
+    window.location.hash = "#signin";
   };
 
   if (route === "#signin") {

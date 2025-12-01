@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
-import {Message} from './Message';
+import { useEffect, useState } from "react";
+import { Message } from "./Message";
 
-type TMsg = {id: number; username: string; message: string};
+type TMsg = { id: number; username: string; message: string; created_at: string };
 
 export const MessageList = () => {
   const [msgs, setMsgs] = useState<TMsg[]>([]);
@@ -15,14 +15,14 @@ export const MessageList = () => {
   }, []);
 
   useEffect(() => {
-    if (typeof window.io === 'function') {
-      const socket = window.io('http://localhost:8080/');
-      socket.on('message', (data: TMsg) => {
+    if (typeof window.io === "function") {
+      const socket = window.io("http://localhost:8080/");
+      socket.on("message", (data: TMsg) => {
         setMsgs((prev) => [...prev, data]);
       });
 
       return () => {
-        socket.off('message');
+        socket.off("message");
       };
     }
   }, []);
