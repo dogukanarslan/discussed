@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { Message } from "./Message";
 
-type TMsg = { id: number; username: string; message: string; created_at: string };
+type TMsg = {
+  id: number;
+  username: string;
+  message: string;
+  created_at: string;
+};
 
 export const MessageList = () => {
   const [msgs, setMsgs] = useState<TMsg[]>([]);
+  const currentUser = JSON.parse(sessionStorage.getItem("user") || '""');
 
   useEffect(() => {
     fetch(`/api/messages`)
@@ -30,7 +36,7 @@ export const MessageList = () => {
   return (
     <div className="message-list">
       {msgs.map((msg) => (
-        <Message key={msg.id} message={msg} />
+        <Message key={msg.id} message={msg} username={currentUser.username} />
       ))}
     </div>
   );

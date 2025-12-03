@@ -1,24 +1,20 @@
+import { formatTime } from "./constants";
+
 interface Props {
   message: { username: string; message: string; created_at: string };
+  username: string;
 }
 
 export const Message = (props: Props) => {
-  const { message } = props;
+  const { message, username } = props;
 
-  const currentUser = JSON.parse(sessionStorage.getItem("user") || '""');
-  const time = `${new Date(message.created_at)
-    .getHours()
-    .toString()}:${new Date(message.created_at).getMinutes().toString()}`;
+  const isCurrentUser = username === message.username;
 
   return (
-    <div
-      className={`message ${
-        message.username === currentUser.username ? "message-right" : ""
-      }`}
-    >
+    <div className={`message ${isCurrentUser ? "message-right" : ""}`}>
       <h4>{message.username}</h4>
       <p>{message.message}</p>
-      <p>{time}</p>
+      <p>{formatTime(message.created_at)}</p>
     </div>
   );
 };
