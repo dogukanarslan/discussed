@@ -6,7 +6,7 @@ export const MessageForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let user = JSON.parse(sessionStorage.getItem("user") || '""');
+    const user = JSON.parse(sessionStorage.getItem("user") || '""');
 
     if (!user) {
       return;
