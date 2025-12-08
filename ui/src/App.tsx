@@ -10,7 +10,8 @@ import { SignUp } from "./SignUp";
 
 function App() {
   const [route, setRoute] = useState(window.location.hash);
-  const user = sessionStorage.getItem("user");
+  const storageUser = sessionStorage.getItem("user");
+  const user = storageUser ? JSON.parse(storageUser) : null;
 
   useEffect(() => {
     const onHashChange = () => setRoute(window.location.hash);
@@ -48,7 +49,7 @@ function App() {
   return (
     <div className="container">
       <div className="header">
-        <h1 className="header__heading">Messages</h1>
+        <h3 className="header__heading">{user.username}</h3>
         <button onClick={handleSignout}>Sign out</button>
       </div>
       <MessageList />

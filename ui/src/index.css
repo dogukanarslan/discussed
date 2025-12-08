@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Quicksand:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Quicksand:wght@300..700&display=swap");
 
 html {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 body {
   margin: 0;
-  background-color: #1a1a1a;
-  color: #f2f2f2;
 }
 
 :root {
@@ -24,7 +22,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p {
   margin: 0;
 }
 
@@ -36,18 +35,24 @@ button {
   cursor: pointer;
 }
 
-button+button {
+button + button {
   margin-left: 5px;
 }
 
 input {
   padding: 5px;
-  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
 }
 
 .container {
   height: 100vh;
   padding: 0 16px;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .header {
@@ -66,21 +71,14 @@ input {
 }
 
 .message {
-  background-color: #fefefe;
-  color: tomato;
-  border-radius: 6px;
-  padding: 6px;
-  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding: 10px 0;
 }
 
-.message-right {
-  margin-left: auto;
-  background-color: tomato;
-  color: #f2f2f2;
-}
-
-.message+.message {
-  margin-top: 6px;
+.message + .message {
+  margin-top: 10px;
 }
 
 .message-input {
@@ -109,7 +107,7 @@ input {
   border-radius: 5px;
 }
 
-.login__form> form >*+* {
+.login__form > form > * + * {
   margin-top: 5px;
 }
 

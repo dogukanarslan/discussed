@@ -11,9 +11,10 @@ export const Message = (props: Props) => {
   const isCurrentUser = username === message.username;
 
   return (
-    <div className={`message ${isCurrentUser ? "message-right" : ""}`}>
-      <h4>{message.username}</h4>
-      <p>{message.message}</p>
+    <div className="message">
+      <div>
+        <b>{isCurrentUser ? "You" : message.username}</b>: {message.message}
+      </div>
       <p>{formatTime(message.created_at)}</p>
     </div>
   );
