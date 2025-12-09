@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+
 import { MessageForm } from "./MessageForm";
 
 import { MessageList } from "./MessageList";
 
 import { SignIn } from "./SignIn";
 
-import "http://localhost:8080/socket.io/socket.io.js";
 import { SignUp } from "./SignUp";
 
 function App() {

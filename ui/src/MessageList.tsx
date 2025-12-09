@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 import { Message } from "./Message";
 
 type TMsg = {
@@ -21,16 +22,14 @@ export const MessageList = () => {
   }, []);
 
   useEffect(() => {
-    if (typeof window.io === "function") {
-      const socket = window.io("http://localhost:8080/");
-      socket.on("message", (data: TMsg) => {
-        setMsgs((prev) => [...prev, data]);
-      });
+    const socket = io(import.meta.env.VITE_BASE_URL);
+    socket.on("message", (data: TMsg) => {
+      setMsgs((prev) => [...prev, data]);
+    });
 
-      return () => {
-        socket.off("message");
-      };
-    }
+    return () => {
+      socket.off("message");
+    };
   }, []);
 
   return (
