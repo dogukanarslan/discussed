@@ -3,8 +3,10 @@ import { UserService } from "../services/UserService.js";
 export const signin = (req, res, next) => {
   const { username, password } = req.body;
   try {
+    const io = req.app.get("socketio");
     const user = UserService.signin(username, password);
     res.cookie("jwt", user.token);
+    io.emit("message", {new_user: user.username});
     return res.status(200).json(user);
   } catch (e) {
     throw { message: e.message };
