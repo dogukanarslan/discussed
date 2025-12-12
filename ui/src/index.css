@@ -98,14 +98,10 @@ input:focus-visible {
 
 /* Sign in */
 .login {
-  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .login__form {
-  padding: 50px 100px;
   border-radius: 5px;
 }
 
