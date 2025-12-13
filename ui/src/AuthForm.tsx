@@ -1,26 +1,23 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface Props {
-  endpoint: string;
-  title: string;
-  buttonText: string;
-  link: { href: string; text: string };
+  setUser: (user: { username: string }) => void;
 }
 
 export const AuthForm = (props: Props) => {
-  const { title, buttonText, endpoint, link } = props;
+  const { setUser } = props;
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError('');
 
-    fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    fetch('/api/signin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
     })
       .then(async (res) => {
@@ -32,51 +29,40 @@ export const AuthForm = (props: Props) => {
         throw Error(data.message);
       })
       .then((data) => {
-        sessionStorage.setItem("user", JSON.stringify(data));
-        window.location.hash = "#";
+        sessionStorage.setItem('user', JSON.stringify(data));
+        setUser({ username: data.username });
       })
       .catch((e) => {
         setError(e.message);
-        setUsername("");
-        setPassword("");
+        setUsername('');
+        setPassword('');
       });
   };
 
   return (
     <div className="login">
-      <div className="login__form">
-        <form onSubmit={handleSubmit}>
-          <h1 className="login__heading">{title}</h1>
+      <form className="login__form" onSubmit={handleSubmit}>
+        <input
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter username"
+          required
+        />
 
-          <div>
-            <label htmlFor="username"></label>
-            <input
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter username"
-              required
-            />
-          </div>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter password"
+          required
+        />
 
-          <div>
-            <label htmlFor="password"></label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-              required
-            />
-          </div>
-
-          {error && <div className="error">{error}</div>}
-          <button>{buttonText}</button>
-        </form>
-
-        <a href={link.href}>{link.text}</a>
-      </div>
+        {error && <div className="error">{error}</div>}
+        <button>Sign in</button>
+        <button>Sign up</button>
+      </form>
     </div>
   );
 };

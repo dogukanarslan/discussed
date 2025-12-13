@@ -36,7 +36,7 @@ app.use(allowCrossDomain);
 
 app.set('socketio', io);
 
-app.use('/messages', validateToken,MessageRoute);
+app.use('/messages', MessageRoute);
 app.use('/', AuthRoute);
 app.use(errorHandler)
 

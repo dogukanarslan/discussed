@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Quicksand:wght@300..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Quicksand:wght@300..700&display=swap');
 
 html {
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 body {
@@ -37,18 +37,6 @@ button {
 
 button + button {
   margin-left: 5px;
-}
-
-input {
-  padding:10px 5px;
-  border-style: solid;
-  border-width: 1px;
-  border-top-style: none;
-  border-left-style: none;
-  border-right-style: none;
-}
-input:focus-visible {
-  outline: none;
 }
 
 .container {
@@ -103,6 +91,9 @@ input:focus-visible {
 
 .login__form {
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .login__form > form > * + * {
