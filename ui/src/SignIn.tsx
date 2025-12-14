@@ -31,7 +31,7 @@ export const SignIn = (props: Props) => {
       .then((data) => {
         sessionStorage.setItem('user', JSON.stringify(data));
         setUser({username: data.username});
-        window.location.hash = ""
+        window.location.hash = '';
       })
       .catch((e) => {
         setError(e.message);
@@ -42,7 +42,7 @@ export const SignIn = (props: Props) => {
 
   return (
     <div className="auth-form">
-      <h1>Sign in</h1>
+      <h2 className="auth-form__heading">Welcome to Discussed!</h2>
       <form className="auth-form__form" onSubmit={handleSubmit}>
         <input
           id="username"
@@ -64,7 +64,9 @@ export const SignIn = (props: Props) => {
         {error && <div className="error">{error}</div>}
         <button>Sign in</button>
       </form>
-      <a href="#signup">Create new account</a>
+      <div>
+        Don't have an account? <a href="#signup">Sign up!</a>
+      </div>
     </div>
   );
 };

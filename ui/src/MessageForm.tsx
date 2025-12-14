@@ -1,28 +1,28 @@
-import { useState } from "react";
+import {useState} from 'react';
 
 export const MessageForm = () => {
-  const [msg, setMsg] = useState("");
+  const [msg, setMsg] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const user = JSON.parse(sessionStorage.getItem("user") || '""');
+    const user = JSON.parse(sessionStorage.getItem('user') || '""');
 
     if (!user) {
       return;
     }
 
     fetch(`/api/messages`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         user_id: user.id,
-        message: msg,
-      }),
+        message: msg
+      })
     }).then(() => {
-      setMsg("");
+      setMsg('');
     });
   };
 
@@ -35,7 +35,9 @@ export const MessageForm = () => {
         onChange={(e) => setMsg(e.target.value)}
         placeholder="Write something"
       />
-      <button className="message-button">Send</button>
+      <div>
+        <button className="message-button">Send</button>
+      </div>
     </form>
   );
 };

@@ -1,20 +1,22 @@
-import { useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
-import { Message } from './Message';
+import {useEffect, useState} from 'react';
+import {io} from 'socket.io-client';
+
+import {Message} from './Message';
 
 type TMsg = {
   id: number;
   username: string;
   message: string;
   created_at: string;
+  new_user: string;
 };
 
 interface Props {
-  user: { username: string };
+  user: {username: string};
 }
 
 export const MessageList = (props: Props) => {
-  const { user } = props;
+  const {user} = props;
 
   const [msgs, setMsgs] = useState<TMsg[]>([]);
 

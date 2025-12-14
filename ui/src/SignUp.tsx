@@ -42,7 +42,7 @@ export const SignUp = (props: Props) => {
 
   return (
     <div className="auth-form">
-      <h1>Sign up</h1>
+      <h2 className='auth-form__heading'>Create a new account!</h2>
       <form className="auth-form__form" onSubmit={handleSubmit}>
         <input
           id="username"
@@ -64,7 +64,9 @@ export const SignUp = (props: Props) => {
         {error && <div className="error">{error}</div>}
         <button>Sign up</button>
       </form>
-      <a href="#signin">Sign in to you existing account</a>
+      <div>
+        Already have an account? <a href="#signin">Sign in!</a>
+      </div>
     </div>
   );
 };
