@@ -41,9 +41,9 @@ export const SignIn = (props: Props) => {
   };
 
   return (
-    <div className="login">
+    <div className="auth-form">
       <h1>Sign in</h1>
-      <form className="login__form" onSubmit={handleSubmit}>
+      <form className="auth-form__form" onSubmit={handleSubmit}>
         <input
           id="username"
           value={username}

@@ -97,8 +97,8 @@ button + button {
   column-gap: 10px;
 }
 
-/* Sign in */
-.login {
+/* Auth Form */
+.auth-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -106,7 +106,7 @@ button + button {
   height: 100%;
 }
 
-.login__form {
+.auth-form__form {
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -114,11 +114,11 @@ button + button {
   gap: 5px;
 }
 
-.login__form > form > * + * {
+.auth-form__form > form > * + * {
   margin-top: 5px;
 }
 
-.login__heading {
+.auth-form__heading {
   text-align: center;
 }
 
