@@ -1,12 +1,70 @@
-import { AuthForm } from "./AuthForm";
+import {useState} from 'react';
 
-export const SignUp = () => {
+interface Props {
+  setUser: (user: {username: string}) => void;
+}
+
+export const SignUp = (props: Props) => {
+  const {setUser} = props;
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username, password})
+    })
+      .then(async (res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        const data = await res.json();
+        throw Error(data.message);
+      })
+      .then((data) => {
+        sessionStorage.setItem('user', JSON.stringify(data));
+        setUser({username: data.username});
+        window.location.hash = '#signin';
+      })
+      .catch((e) => {
+        setError(e.message);
+        setUsername('');
+        setPassword('');
+      });
+  };
+
   return (
-    <AuthForm
-      buttonText="Sign up"
-      endpoint="/api/signup"
-      title="Sign up"
-      link={{ text: "Alread have an account?", href: "#signup" }}
-    />
+    <div className="login">
+      <h1>Sign up</h1>
+      <form className="login__form" onSubmit={handleSubmit}>
+        <input
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter username"
+          required
+        />
+
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter password"
+          required
+        />
+
+        {error && <div className="error">{error}</div>}
+        <button>Sign up</button>
+      </form>
+      <a href="#signin">Sign in to you existing account</a>
+    </div>
   );
 };
