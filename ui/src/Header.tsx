@@ -1,10 +1,10 @@
-import { AuthForm } from './AuthForm';
 interface Props {
-  user: { username: string };
-  setUser: (user: { username: string } | null) => void;
+  user: {username: string};
+  setUser: (user: {username: string} | null) => void;
 }
+
 export const Header = (props: Props) => {
-  const { user, setUser } = props;
+  const {user, setUser} = props;
 
   const handleSignout = () => {
     sessionStorage.removeItem('user');
@@ -13,14 +13,10 @@ export const Header = (props: Props) => {
 
   return (
     <div className="header">
-      {user ? (
-        <>
-          <h3 className="header__heading">{user.username}</h3>
-          <button onClick={handleSignout}>Sign out</button>
-        </>
-      ) : (
-        <AuthForm setUser={setUser} />
-      )}
+      <h3 className="header__heading">{user.username}</h3>
+      <div>
+        <button onClick={handleSignout}>Sign out</button>
+      </div>
     </div>
   );
 };

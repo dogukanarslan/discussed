@@ -46,6 +46,10 @@ function App() {
     );
   }
 
+  if (!user) {
+    return;
+  }
+
   return (
     <div className="container">
       <Header user={user} setUser={setUser} />
