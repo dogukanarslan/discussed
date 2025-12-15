@@ -1,11 +1,8 @@
 import {useEffect, useState} from 'react';
 
-import {MessageForm} from './MessageForm';
-import {MessageList} from './MessageList';
-
-import {Header} from './Header';
-import {SignIn} from './SignIn';
-import {SignUp} from './SignUp';
+import {SignIn} from './pages/SignIn';
+import {SignUp} from './pages/SignUp';
+import {Chat} from './pages/Chat';
 
 function App() {
   const storageUser = sessionStorage.getItem('user');
@@ -50,13 +47,7 @@ function App() {
     return;
   }
 
-  return (
-    <div className="container">
-      <Header user={user} setUser={setUser} />
-      <MessageList user={user} />
-      <MessageForm />
-    </div>
-  );
+  return <Chat user={user} setUser={setUser} />;
 }
 
 export default App;
