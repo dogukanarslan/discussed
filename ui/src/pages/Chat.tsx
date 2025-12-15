@@ -10,6 +10,10 @@ interface Props {
 export const Chat = (props: Props) => {
   const {user, setUser} = props;
 
+  if (!user) {
+    return;
+  }
+
   return (
     <div className="container">
       <Header user={user} setUser={setUser} />
