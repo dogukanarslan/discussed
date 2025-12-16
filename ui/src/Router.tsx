@@ -18,5 +18,5 @@ export const Router = (props: Props) => {
     };
   }, []);
 
-  return <div>{children[route]}</div>;
+  return children[route];
 };
