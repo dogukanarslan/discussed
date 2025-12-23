@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# Discussed
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Discussed is a discussion platform designed to support structured conversations and community-driven interactions. The project focuses on clean backend architecture, scalability, and maintainability while providing a solid foundation for building forums, comment systems, or discussion-based applications.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Backend:
+- Node.js
+- REST API
+- Web Socket
 
-## React Compiler
+Frontend:
+- React
+- TypeScript
+- Vite
+- Vitest
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Installation
 
-## Expanding the ESLint configuration
+Clone the repository:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+`git clone https://github.com/dogukanarslan/discussed.git`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+`cd discussed`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Install dependencies:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+`npm install`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Create an environment file:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+`cp .env.example .env`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Fill in the required values such as server port, database connection string, and authentication secrets.
+
+## Running the Project
+
+Development mode:
+
+`npm run dev`
+
+Production build:
+
+`npm run build`
+
+`npm start`
+
+## Testing
+
+Run tests using:
+
+`npm test`
+
+Tests are configured with Vitest and can be extended to cover services, controllers, and integrations.
+
+## Environment Variables
+
+Common environment variables include:
+
+- PORT: Server port
+- DB_URI: Database connection string
+- JWT_SECRET: Authentication secret
+
+Refer to `.env.example` for the full list.
