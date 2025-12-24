@@ -2,10 +2,16 @@
 
 html {
   font-family: 'Quicksand', sans-serif;
+  height: 100%;
 }
 
 body {
   margin: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
 
 :root {
@@ -24,7 +30,8 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+ul {
   margin: 0;
 }
 
@@ -51,10 +58,51 @@ input {
 }
 
 .container {
-  height: 100vh;
   padding: 0 16px;
   max-width: 1024px;
   margin: 0 auto;
+}
+
+.wrapper {
+  border: 1px solid black;
+}
+
+.main {
+  display: flex;
+  column-gap: 10px;
+  height: calc(100% - var(--header-height));
+}
+
+.message-list {
+}
+.message-wrapper {
+  padding: 0 20px;
+  width: 100%;
+}
+
+.connected-users {
+  width: 20%;
+  padding: 10px;
+  border-right: 1px solid #f2f2f2;
+
+  .user {
+    animation: slideDown 500ms ease forwards;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .user + .user {
+    margin-top: 10px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .connected-users {
+    display: none;
+  }
 }
 
 .header {
@@ -63,13 +111,14 @@ input {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #f2f2f2;
+  padding: 20px;
 }
 
 /* Messages */
 .message-list {
   height: calc(100vh - var(--message-form-height) - var(--header-height));
+  width: 100%;
   overflow-y: auto;
-  padding: 30px 0;
 }
 
 @keyframes slideDown {
@@ -110,6 +159,7 @@ input {
 
 /* Auth Form */
 .auth-form {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

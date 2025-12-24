@@ -1,6 +1,6 @@
-import {MessageForm} from '../MessageForm';
-import {MessageList} from '../MessageList';
 import {Header} from '../Header';
+import {ConnectedUsers} from '../ConnectedUsers';
+import {MessageWrapper} from '../MessageWrapper';
 
 interface Props {
   user: {username: string};
@@ -15,10 +15,12 @@ export const Chat = (props: Props) => {
   }
 
   return (
-    <div className="container">
+    <>
       <Header user={user} setUser={setUser} />
-      <MessageList user={user} />
-      <MessageForm />
-    </div>
+      <div className="main">
+        <ConnectedUsers />
+        <MessageWrapper user={user} />
+      </div>
+    </>
   );
 };

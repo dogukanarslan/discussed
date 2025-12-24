@@ -22,16 +22,8 @@ function App() {
   }, [user]);
 
   const routes = {
-    '#signin': (
-      <div className="container">
-        <SignIn setUser={setUser} />
-      </div>
-    ),
-    '#signup': (
-      <div className="container">
-        <SignUp setUser={setUser} />
-      </div>
-    ),
+    '#signin': <SignIn setUser={setUser} />,
+    '#signup': <SignUp setUser={setUser} />,
     '': <Chat user={user} setUser={setUser} />
   };
 
