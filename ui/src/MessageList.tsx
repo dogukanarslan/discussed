@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
-import {io} from 'socket.io-client';
 
 import {Message} from './Message';
+import {socket} from './socket';
 
 type TMsg = {
   id: number;
@@ -29,7 +29,6 @@ export const MessageList = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    const socket = io(import.meta.env.VITE_BASE_URL);
     socket.on('message', (data: TMsg) => {
       setMsgs((prev) => [...prev, data]);
     });

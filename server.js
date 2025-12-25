@@ -5,8 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {Server} from 'socket.io';
 import {router as MessageRoute} from './routes/messagesRoute.js';
 import {router as AuthRoute} from './routes/authRoute.js';
-import { errorHandler } from './middlewares/errorHandler.js';
-import { validateToken } from './middlewares/validateToken.js';
+import {errorHandler} from './middlewares/errorHandler.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,7 +37,7 @@ app.set('socketio', io);
 
 app.use('/messages', MessageRoute);
 app.use('/', AuthRoute);
-app.use(errorHandler)
+app.use(errorHandler);
 
 const server = httpServer.listen(process.env.PORT || 3000, () => {
   console.log('server is runnning on port ', server.address().port);

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {io} from 'socket.io-client';
+import {socket} from './socket';
 
 export const ConnectedUsers = () => {
   const [users, setUsers] = useState<{username: string}[]>([]);
@@ -13,14 +13,12 @@ export const ConnectedUsers = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io(import.meta.env.VITE_BASE_URL);
     socket.on('connectedUsers', (data: {username: string}[]) => {
-      console.log('data', data);
       setUsers(data);
     });
 
     return () => {
-      socket.off('message');
+      socket.off('connectedUsers');
     };
   }, []);
 
