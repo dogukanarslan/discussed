@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import {Router} from './Router';
-import {SignUp} from './pages/SignUp';
-import {SignIn} from './pages/SignIn';
-import {Chat} from './pages/Chat';
+import {SignUp} from './pages/sign-up/SignUp';
+import {SignIn} from './pages/sign-in/SignIn';
+import {Chat} from './pages/chat/Chat';
 
 function App() {
   const storageUser = sessionStorage.getItem('user');

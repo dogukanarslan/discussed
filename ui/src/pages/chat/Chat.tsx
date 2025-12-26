@@ -1,8 +1,8 @@
-import {Header} from '../Header';
-import {ConnectedUsers} from '../ConnectedUsers';
-import {MessageWrapper} from '../MessageWrapper';
+import {Header} from '../../components/Header';
+import {ConnectedUsers} from './ConnectedUsers';
+import {MessageWrapper} from './MessageWrapper';
 import {useEffect} from 'react';
-import {socket} from '../socket';
+import {socket} from '../../socket';
 
 interface Props {
   user: {username: string};

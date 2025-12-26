@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 
 import {Message} from './Message';
-import {socket} from './socket';
+import {socket} from '../../socket';
 
 type TMsg = {
   id: number;
