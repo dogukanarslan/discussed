@@ -1,6 +1,8 @@
 import {Header} from '../Header';
 import {ConnectedUsers} from '../ConnectedUsers';
 import {MessageWrapper} from '../MessageWrapper';
+import {useEffect} from 'react';
+import {socket} from '../socket';
 
 interface Props {
   user: {username: string};
@@ -9,6 +11,12 @@ interface Props {
 
 export const Chat = (props: Props) => {
   const {user, setUser} = props;
+
+  useEffect(() => {
+    if (user) {
+      socket.emit('user:join', user);
+    }
+  }, [user]);
 
   if (!user) {
     return;

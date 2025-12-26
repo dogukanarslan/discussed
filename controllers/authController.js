@@ -1,7 +1,5 @@
 import {UserService} from '../services/UserService.js';
 
-const users = [];
-
 export const signin = (req, res, next) => {
   const {username, password} = req.body;
 
@@ -9,9 +7,6 @@ export const signin = (req, res, next) => {
     const io = req.app.get('socketio');
     const user = UserService.signin(username, password);
     res.cookie('jwt', user.token);
-    io.emit('message', {new_user: user.username});
-    io.emit('connectedUsers', users);
-    users.push(user);
 
     return res.status(200).json(user);
   } catch (e) {
@@ -31,14 +26,6 @@ export const signup = (req, res, next) => {
       return next({status: 409, message: 'Username already exists'});
     }
 
-    return next(e);
-  }
-};
-
-export const getConnectedUsers = (req, res, next) => {
-  try {
-    res.status(200).json(users);
-  } catch (e) {
     return next(e);
   }
 };

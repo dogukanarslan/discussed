@@ -3,13 +3,16 @@ import {socket} from './socket';
 
 export const ConnectedUsers = () => {
   const [users, setUsers] = useState<{username: string}[]>([]);
-
   useEffect(() => {
-    fetch(`/api/connected-users`)
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data);
-      });
+    const updateUsers = (data: {username: string}[]) => {
+      setUsers(data);
+    };
+
+    socket.on('users:update', updateUsers);
+
+    return () => {
+      socket.off('users:update', updateUsers);
+    };
   }, []);
 
   useEffect(() => {
