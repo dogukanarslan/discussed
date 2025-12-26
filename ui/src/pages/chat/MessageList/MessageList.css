@@ -1,0 +1,5 @@
+.message-list {
+  height: calc(100vh - var(--message-form-height) - var(--header-height));
+  width: 100%;
+  overflow-y: auto;
+}

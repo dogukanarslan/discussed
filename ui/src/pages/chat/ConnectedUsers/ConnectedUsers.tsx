@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react';
-import {socket} from '../../socket';
+import {socket} from '../../../socket';
+
+import './ConnectesUsers.css'
 
 export const ConnectedUsers = () => {
   const [users, setUsers] = useState<{username: string}[]>([]);

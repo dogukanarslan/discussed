@@ -1,5 +1,7 @@
-import {MessageForm} from './MessageForm';
-import {MessageList} from './MessageList';
+import {MessageForm} from '../MessageForm/MessageForm';
+import {MessageList} from '../MessageList/MessageList';
+
+import './MessageWrapper.css';
 
 interface Props {
   user: {username: string};

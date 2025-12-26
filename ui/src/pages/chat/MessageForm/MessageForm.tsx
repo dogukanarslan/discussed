@@ -1,5 +1,7 @@
 import {useState} from 'react';
 
+import './MessageForm.css';
+
 export const MessageForm = () => {
   const [msg, setMsg] = useState('');
 
@@ -36,7 +38,7 @@ export const MessageForm = () => {
         placeholder="Write something"
       />
       <div>
-        <button className="message-button">Send</button>
+        <button>Send</button>
       </div>
     </form>
   );

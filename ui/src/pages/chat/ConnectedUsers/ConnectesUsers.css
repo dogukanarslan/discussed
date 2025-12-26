@@ -1,0 +1,25 @@
+.connected-users {
+  width: 20%;
+  padding: 10px;
+  border-right: 1px solid #f2f2;
+
+  .user {
+    animation: slideDown 500ms ease forwards;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .user + .user {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .connected-users {
+    display: none;
+  }
+}

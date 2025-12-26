@@ -1,4 +1,6 @@
-import {formatTime} from '../../constants';
+import {formatTime} from '../../../constants';
+
+import './Message.css';
 
 interface Props {
   message: {

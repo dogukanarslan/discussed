@@ -1,6 +1,6 @@
 import {Header} from '../../components/Header';
-import {ConnectedUsers} from './ConnectedUsers';
-import {MessageWrapper} from './MessageWrapper';
+import {ConnectedUsers} from './ConnectedUsers/ConnectedUsers';
+import {MessageWrapper} from './MessageWrapper/MessageWrapper';
 import {useEffect} from 'react';
 import {socket} from '../../socket';
 
