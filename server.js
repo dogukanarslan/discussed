@@ -22,14 +22,11 @@ const io = new Server(httpServer, {
 const connectedUsers = new Map();
 
 io.on('connection', (socket) => {
-  console.log('Connected ' + socket.id);
-
   socket.on('user:join', (user) => {
     if (!user.id || !user.username) {
       return;
     }
 
-    console.log('setting connected users');
     socket.userId = user.id;
     connectedUsers.set(user.id, user);
 
@@ -37,7 +34,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log('DISCONNECTED...');
     if (socket.userId) {
       connectedUsers.delete(socket.userId);
     }
