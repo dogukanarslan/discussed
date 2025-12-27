@@ -37,7 +37,6 @@ io.on('connection', (socket) => {
     if (socket.userId) {
       connectedUsers.delete(socket.userId);
     }
-    console.log('connectedUsers', connectedUsers);
     io.emit('users:update', Array.from(connectedUsers.values()));
   });
 });
