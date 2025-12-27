@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react';
 import {socket} from '../../../socket';
 
-import './ConnectesUsers.css'
+import './ConnectesUsers.css';
 
 export const ConnectedUsers = () => {
   const [users, setUsers] = useState<{username: string}[]>([]);
   useEffect(() => {
     const updateUsers = (data: {username: string}[]) => {
+      console.log('UPDATING USERS...');
       setUsers(data);
     };
 
@@ -14,16 +15,6 @@ export const ConnectedUsers = () => {
 
     return () => {
       socket.off('users:update', updateUsers);
-    };
-  }, []);
-
-  useEffect(() => {
-    socket.on('connectedUsers', (data: {username: string}[]) => {
-      setUsers(data);
-    });
-
-    return () => {
-      socket.off('connectedUsers');
     };
   }, []);
 
