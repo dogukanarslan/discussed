@@ -64,8 +64,9 @@ input {
 }
 
 .main {
-  display: flex;
-  column-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 10px;
   height: calc(100% - var(--header-height));
 }
 
