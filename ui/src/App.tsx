@@ -11,7 +11,6 @@ function App() {
     storageUser ? JSON.parse(storageUser) : null
   );
 
-  console.log(window.location.hash);
   useEffect(() => {
     if (!window.location.hash) {
       window.location.hash = '#chat';

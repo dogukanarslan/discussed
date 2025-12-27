@@ -7,7 +7,6 @@ export const ConnectedUsers = () => {
   const [users, setUsers] = useState<{username: string}[]>([]);
   useEffect(() => {
     const updateUsers = (data: {username: string}[]) => {
-      console.log('UPDATING USERS...');
       setUsers(data);
     };
 
