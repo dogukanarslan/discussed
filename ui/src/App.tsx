@@ -11,7 +11,12 @@ function App() {
     storageUser ? JSON.parse(storageUser) : null
   );
 
+  console.log(window.location.hash);
   useEffect(() => {
+    if (!window.location.hash) {
+      window.location.hash = '#chat';
+    }
+
     if (
       !user &&
       window.location.hash !== '#signin' &&
@@ -24,7 +29,7 @@ function App() {
   const routes = {
     '#signin': <SignIn setUser={setUser} />,
     '#signup': <SignUp setUser={setUser} />,
-    '': <Chat user={user} setUser={setUser} />
+    '#chat': <Chat user={user} setUser={setUser} />
   };
 
   return <Router>{routes}</Router>;
