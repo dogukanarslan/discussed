@@ -1,3 +1,5 @@
+import './Header.css';
+
 interface Props {
   user: {username: string};
   setUser: (user: {username: string} | null) => void;
@@ -13,9 +15,12 @@ export const Header = (props: Props) => {
 
   return (
     <div className="header">
-      <h3 className="header__heading">{user.username}</h3>
-      <div>
-        <button onClick={handleSignout}>Sign out</button>
+      <h3>Discussed</h3>
+      <div className="header__info">
+        <h4 className="header__heading">{user.username}</h4>
+        <div>
+          <button onClick={handleSignout}>Sign out</button>
+        </div>
       </div>
     </div>
   );
