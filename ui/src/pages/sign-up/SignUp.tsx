@@ -31,7 +31,7 @@ export const SignUp = (props: Props) => {
       .then((data) => {
         sessionStorage.setItem('user', JSON.stringify(data));
         setUser({username: data.username});
-        window.location.hash = '#signin';
+        window.location.hash = '#chat';
       })
       .catch((e) => {
         setError(e.message);
