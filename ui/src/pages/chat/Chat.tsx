@@ -1,5 +1,6 @@
 import {Header} from '../../components/Header';
 import {ConnectedUsers} from './ConnectedUsers/ConnectedUsers';
+import {Rooms} from './Rooms/Rooms';
 import {MessageWrapper} from './MessageWrapper/MessageWrapper';
 import {useEffect} from 'react';
 import {socket} from '../../socket';
@@ -26,7 +27,10 @@ export const Chat = (props: Props) => {
     <>
       <Header user={user} setUser={setUser} />
       <div className="main">
-        <ConnectedUsers />
+        <div className="left-column">
+          <ConnectedUsers />
+          <Rooms />
+        </div>
         <MessageWrapper user={user} />
       </div>
     </>

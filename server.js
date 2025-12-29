@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {Server} from 'socket.io';
 import {router as MessageRoute} from './routes/messagesRoute.js';
 import {router as AuthRoute} from './routes/authRoute.js';
+import {router as RoomRoute} from './routes/roomRoute.js';
 import {errorHandler} from './middlewares/errorHandler.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -58,6 +59,7 @@ app.use(allowCrossDomain);
 app.set('socketio', io);
 
 app.use('/messages', MessageRoute);
+app.use('/rooms', RoomRoute);
 app.use('/', AuthRoute);
 app.use(errorHandler);
 
