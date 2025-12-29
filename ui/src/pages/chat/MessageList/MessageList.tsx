@@ -42,9 +42,13 @@ export const MessageList = (props: Props) => {
 
   return (
     <div className="message-list">
-      {msgs.map((msg) => (
-        <Message key={msg.id} message={msg} username={user?.username} />
-      ))}
+      {msgs.length === 0 ? (
+        <p>No messages</p>
+      ) : (
+        msgs.map((msg) => (
+          <Message key={msg.id} message={msg} username={user?.username} />
+        ))
+      )}
     </div>
   );
 };
