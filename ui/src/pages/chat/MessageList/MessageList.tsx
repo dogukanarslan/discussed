@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 import {Message} from '../Message/Message';
 import {socket} from '../../../socket';
@@ -21,6 +21,21 @@ export const MessageList = (props: Props) => {
   const {user} = props;
 
   const [msgs, setMsgs] = useState<TMsg[]>([]);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (msgs.length === 0) {
+      return;
+    }
+
+    document.fonts.ready.then(() => {
+      if (!ref.current) {
+        return;
+      }
+
+      ref.current.scrollIntoView({block: 'end'});
+    });
+  }, [msgs]);
 
   useEffect(() => {
     fetch(`/api/messages`)
@@ -49,6 +64,7 @@ export const MessageList = (props: Props) => {
           <Message key={msg.id} message={msg} username={user?.username} />
         ))
       )}
+      {msgs.length > 0 && <div ref={ref} />}
     </div>
   );
 };
