@@ -12,9 +12,9 @@ export const index = (req, res) => {
 export const store = (req, res) => {
   try {
     const {name, user_id} = req.body;
-    RoomService.create({name, user_id});
+    const room = RoomService.create({name, user_id});
 
-    res.sendStatus(201);
+    res.status(201).json(room);
   } catch (e) {
     res.status(400).json({error: e.message});
   }

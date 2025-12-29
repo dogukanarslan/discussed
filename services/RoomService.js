@@ -1,6 +1,14 @@
 import {RoomModel} from '../models/roomModel.js';
 
 export const RoomService = {
+  getById(roomId) {
+    const room = RoomModel.getById(roomId);
+    if (!room) {
+      throw {status: 404, message: 'Room not found'};
+    }
+
+    return room;
+  },
   getAll() {
     return RoomModel.getAll();
   },
@@ -14,6 +22,6 @@ export const RoomService = {
     }
 
     const {id} = RoomModel.create(name, user_id);
-    return RoomModel.get(id);
+    return RoomModel.getById(id);
   }
 };

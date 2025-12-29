@@ -1,6 +1,13 @@
 import {database} from '../db/db.js';
 
 export const RoomModel = {
+  getById(roomId) {
+    try {
+      return database.prepare('SELECT * FROM rooms WHERE id = ?').get(roomId);
+    } catch (e) {
+      throw e;
+    }
+  },
   getAll() {
     try {
       return database.prepare('SELECT * FROM rooms').all();
@@ -9,7 +16,6 @@ export const RoomModel = {
     }
   },
   create(name, user_id) {
-    console.log(process.env.HOME, process.env.DB);
     try {
       const result = database
         .prepare('INSERT INTO rooms (name, user_id) VALUES (?, ?)')

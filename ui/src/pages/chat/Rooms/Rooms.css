@@ -1,17 +1,30 @@
 .rooms {
   padding: 10px;
 
+  display: flex;
+  flex-direction: column;
   .user {
     animation: slideDown 500ms ease forwards;
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
+  > div {
     margin-top: 10px;
+    overflow-y: auto;
+    height: 100%;
   }
 
-  .user + .user {
+  div > ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .room + .room {
     margin-top: 10px;
   }
+}
+
+.room-form {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
 }
