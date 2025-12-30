@@ -19,3 +19,13 @@ export const store = (req, res) => {
     res.status(400).json({error: e.message});
   }
 };
+
+export const deleteRoom = (req, res) => {
+  try {
+    const {roomId} = req.params;
+    RoomService.delete(roomId);
+    res.sendStatus(204);
+  } catch (e) {
+    res.status(400).json({error: e.message});
+  }
+};

@@ -41,7 +41,6 @@ button {
   border-radius: 5px;
   border-color: transparent;
   cursor: pointer;
-  width: 100%;
   background-color: var(--primary-color);
 }
 

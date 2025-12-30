@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 
 import './Rooms.css';
+import {RoomItem} from './RoomItem';
 
 export const Rooms = () => {
   const [roomName, setRoomName] = useState('');
@@ -45,13 +46,11 @@ export const Rooms = () => {
       <h4>Rooms</h4>
       <div>
         {rooms.length > 0 ? (
-          <ul>
+          <div>
             {rooms.map((room) => (
-              <li key={room.id} className="room">
-                {room.name}
-              </li>
+              <RoomItem key={room.id} name={room.name} id={room.id} />
             ))}
-          </ul>
+          </div>
         ) : (
           'No connected users'
         )}

@@ -24,5 +24,15 @@ export const RoomModel = {
     } catch (e) {
       throw e;
     }
+  },
+  delete(roomId) {
+    try {
+      const result = database
+        .prepare('DELETE FROM rooms WHERE id = ?')
+        .get(roomId);
+      return {id: roomId};
+    } catch (e) {
+      throw e;
+    }
   }
 };

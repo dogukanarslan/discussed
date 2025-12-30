@@ -1,0 +1,12 @@
+.room-item {
+  display: flex;
+  align-items: center;
+}
+
+.room-item + .room-item {
+  margin-top: 10px;
+}
+
+.room-item__name {
+  width: 100%;
+}
