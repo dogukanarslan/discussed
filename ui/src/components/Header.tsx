@@ -1,12 +1,12 @@
 import './Header.css';
 
 interface Props {
-  user: {username: string};
-  setUser: (user: {username: string} | null) => void;
+  user: { username: string };
+  setUser: (user: { username: string } | null) => void;
 }
 
 export const Header = (props: Props) => {
-  const {user, setUser} = props;
+  const { user, setUser } = props;
 
   const handleSignout = () => {
     sessionStorage.removeItem('user');

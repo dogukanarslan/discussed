@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const RoomItem = (props: Props) => {
-  const {name, selected, handleDelete, changeRoom} = props;
+  const { name, selected, handleDelete, changeRoom } = props;
 
   return (
     <div

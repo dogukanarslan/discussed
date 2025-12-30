@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
 import './Rooms.css';
-import {RoomItem} from './RoomItem';
+import { RoomItem } from './RoomItem';
 
 interface Props {
   selectedRoomId: number;
@@ -9,10 +9,10 @@ interface Props {
 }
 
 export const Rooms = (props: Props) => {
-  const {selectedRoomId, setSelectedRoomId} = props;
+  const { selectedRoomId, setSelectedRoomId } = props;
 
   const [roomName, setRoomName] = useState('');
-  const [rooms, setRooms] = useState<{name: string; id: number}[]>([]);
+  const [rooms, setRooms] = useState<{ name: string; id: number }[]>([]);
 
   useEffect(() => {
     fetch(`/api/rooms`)
@@ -34,12 +34,12 @@ export const Rooms = (props: Props) => {
     fetch(`/api/rooms`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: roomName,
-        user_id: 1
-      })
+        user_id: 1,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -50,7 +50,7 @@ export const Rooms = (props: Props) => {
 
   const deleteRoom = (roomId: number) => {
     fetch(`/api/rooms/${roomId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
     }).then((res) => {
       if (res.ok) {
         setRooms(rooms.filter((room) => room.id !== roomId));

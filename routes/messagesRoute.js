@@ -1,5 +1,5 @@
 import express from 'express';
-import {store, index, getByRoomId} from '../controllers/messageController.js';
+import { store, index, getByRoomId } from '../controllers/messageController.js';
 
 export const router = express.Router();
 

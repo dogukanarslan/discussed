@@ -1,13 +1,13 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
-import {socket} from '../../socket';
+import { socket } from '../../socket';
 
 interface Props {
-  setUser: (user: {username: string}) => void;
+  setUser: (user: { username: string }) => void;
 }
 
 export const SignIn = (props: Props) => {
-  const {setUser} = props;
+  const { setUser } = props;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -19,8 +19,8 @@ export const SignIn = (props: Props) => {
 
     fetch('/api/signin', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username, password})
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
     })
       .then(async (res) => {
         if (res.ok) {
@@ -33,7 +33,7 @@ export const SignIn = (props: Props) => {
       .then((data) => {
         sessionStorage.setItem('user', JSON.stringify(data));
         socket.emit('user:join', data);
-        setUser({username: data.username});
+        setUser({ username: data.username });
         window.location.hash = '#chat';
       })
       .catch((e) => {

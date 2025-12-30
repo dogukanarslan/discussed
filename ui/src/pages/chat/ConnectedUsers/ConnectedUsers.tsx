@@ -1,12 +1,12 @@
-import {useEffect, useState} from 'react';
-import {socket} from '../../../socket';
+import { useEffect, useState } from 'react';
+import { socket } from '../../../socket';
 
 import './ConnectesUsers.css';
 
 export const ConnectedUsers = () => {
-  const [users, setUsers] = useState<{username: string}[]>([]);
+  const [users, setUsers] = useState<{ username: string }[]>([]);
   useEffect(() => {
-    const updateUsers = (data: {username: string}[]) => {
+    const updateUsers = (data: { username: string }[]) => {
       setUsers(data);
     };
 

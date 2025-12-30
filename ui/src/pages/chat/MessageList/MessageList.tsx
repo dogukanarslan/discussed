@@ -1,7 +1,7 @@
-import {useEffect, useRef, useState} from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import {Message} from '../Message/Message';
-import {socket} from '../../../socket';
+import { Message } from '../Message/Message';
+import { socket } from '../../../socket';
 
 import './MessageList.css';
 
@@ -14,12 +14,12 @@ type TMsg = {
 };
 
 interface Props {
-  user: {username: string};
+  user: { username: string };
   selectedRoomId: number;
 }
 
 export const MessageList = (props: Props) => {
-  const {user, selectedRoomId} = props;
+  const { user, selectedRoomId } = props;
 
   const [msgs, setMsgs] = useState<TMsg[]>([]);
   const ref = useRef<HTMLDivElement>(null);
@@ -34,7 +34,7 @@ export const MessageList = (props: Props) => {
         return;
       }
 
-      ref.current.scrollIntoView({block: 'end'});
+      ref.current.scrollIntoView({ block: 'end' });
     });
   }, [msgs]);
 

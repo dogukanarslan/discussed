@@ -1,14 +1,14 @@
-import {useEffect, useState} from 'react';
-import {Router} from './Router';
-import {SignUp} from './pages/sign-up/SignUp';
-import {SignIn} from './pages/sign-in/SignIn';
-import {Chat} from './pages/chat/Chat';
+import { useEffect, useState } from 'react';
+import { Router } from './Router';
+import { SignUp } from './pages/sign-up/SignUp';
+import { SignIn } from './pages/sign-in/SignIn';
+import { Chat } from './pages/chat/Chat';
 
 function App() {
   const storageUser = sessionStorage.getItem('user');
 
   const [user, setUser] = useState(
-    storageUser ? JSON.parse(storageUser) : null
+    storageUser ? JSON.parse(storageUser) : null,
   );
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function App() {
   const routes = {
     '#signin': <SignIn setUser={setUser} />,
     '#signup': <SignUp setUser={setUser} />,
-    '#chat': <Chat user={user} setUser={setUser} />
+    '#chat': <Chat user={user} setUser={setUser} />,
   };
 
   return <Router>{routes}</Router>;

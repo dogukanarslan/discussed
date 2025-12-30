@@ -1,4 +1,4 @@
-import {formatTime} from '../../../constants';
+import { formatTime } from '../../../constants';
 
 import './Message.css';
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const Message = (props: Props) => {
-  const {message, username} = props;
+  const { message, username } = props;
 
   const isCurrentUser = username === message.username;
 

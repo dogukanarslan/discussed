@@ -1,6 +1,6 @@
-import { defineConfig } from 'vitest/config'
-import { preview } from '@vitest/browser-preview'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vitest/config';
+import { preview } from '@vitest/browser-preview';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
@@ -8,9 +8,7 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: preview(),
-      instances: [
-        { browser: 'chrome' },
-      ],
+      instances: [{ browser: 'chrome' }],
     },
   },
-})
+});

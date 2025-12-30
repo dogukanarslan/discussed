@@ -1,17 +1,17 @@
-import {Header} from '../../components/Header';
-import {ConnectedUsers} from './ConnectedUsers/ConnectedUsers';
-import {Rooms} from './Rooms/Rooms';
-import {MessageWrapper} from './MessageWrapper/MessageWrapper';
-import {useEffect, useState} from 'react';
-import {socket} from '../../socket';
+import { Header } from '../../components/Header';
+import { ConnectedUsers } from './ConnectedUsers/ConnectedUsers';
+import { Rooms } from './Rooms/Rooms';
+import { MessageWrapper } from './MessageWrapper/MessageWrapper';
+import { useEffect, useState } from 'react';
+import { socket } from '../../socket';
 
 interface Props {
-  user: {username: string};
-  setUser: (user: {username: string} | null) => void;
+  user: { username: string };
+  setUser: (user: { username: string } | null) => void;
 }
 
 export const Chat = (props: Props) => {
-  const {user, setUser} = props;
+  const { user, setUser } = props;
   const [selectedRoomId, setSelectedRoomId] = useState(1);
 
   useEffect(() => {

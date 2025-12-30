@@ -1,11 +1,11 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 interface Props {
-  setUser: (user: {username: string}) => void;
+  setUser: (user: { username: string }) => void;
 }
 
 export const SignUp = (props: Props) => {
-  const {setUser} = props;
+  const { setUser } = props;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -17,8 +17,8 @@ export const SignUp = (props: Props) => {
 
     fetch('/api/signup', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username, password})
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
     })
       .then(async (res) => {
         if (res.ok) {
@@ -30,7 +30,7 @@ export const SignUp = (props: Props) => {
       })
       .then((data) => {
         sessionStorage.setItem('user', JSON.stringify(data));
-        setUser({username: data.username});
+        setUser({ username: data.username });
         window.location.hash = '#chat';
       })
       .catch((e) => {
@@ -42,7 +42,7 @@ export const SignUp = (props: Props) => {
 
   return (
     <div className="auth-form">
-      <h2 className='auth-form__heading'>Create a new account!</h2>
+      <h2 className="auth-form__heading">Create a new account!</h2>
       <form className="auth-form__form" onSubmit={handleSubmit}>
         <input
           id="username"

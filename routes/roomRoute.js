@@ -1,5 +1,5 @@
 import express from 'express';
-import {store, index, deleteRoom} from '../controllers/roomController.js';
+import { store, index, deleteRoom } from '../controllers/roomController.js';
 
 export const router = express.Router();
 

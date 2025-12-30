@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
   children: Record<string, React.ReactNode>;
 }
 
 export const Router = (props: Props) => {
-  const {children} = props;
+  const { children } = props;
 
   const [route, setRoute] = useState(window.location.hash);
 

@@ -5,11 +5,13 @@ Discussed is a discussion platform designed to support structured conversations 
 ## Tech Stack
 
 Backend:
+
 - Node.js
 - REST API
 - Web Socket
 
 Frontend:
+
 - React
 - TypeScript
 - Vite
