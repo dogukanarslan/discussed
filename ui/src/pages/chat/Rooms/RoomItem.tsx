@@ -1,23 +1,17 @@
 import './RoomItem.css';
 
 interface Props {
-  id: number;
+  handleDelete: () => void;
   name: string;
 }
 
 export const RoomItem = (props: Props) => {
-  const {name, id} = props;
-
-  const deleteRoom = () => {
-    fetch(`/api/rooms/${id}`, {
-      method: 'DELETE'
-    });
-  };
+  const {name, handleDelete} = props;
 
   return (
     <div className="room-item">
       <div className="room-item__name">{name}</div>
-      <button className="room-item__delete-btn" onClick={deleteRoom}>
+      <button className="room-item__delete-btn" onClick={handleDelete}>
         X
       </button>
     </div>

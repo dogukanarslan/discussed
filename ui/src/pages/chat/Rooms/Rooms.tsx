@@ -41,6 +41,16 @@ export const Rooms = () => {
       });
   };
 
+  const deleteRoom = (roomId: number) => {
+    fetch(`/api/rooms/${roomId}`, {
+      method: 'DELETE'
+    }).then((res) => {
+      if (res.ok) {
+        setRooms(rooms.filter((room) => room.id !== roomId));
+      }
+    });
+  };
+
   return (
     <div className="rooms">
       <h4>Rooms</h4>
@@ -48,7 +58,11 @@ export const Rooms = () => {
         {rooms.length > 0 ? (
           <div>
             {rooms.map((room) => (
-              <RoomItem key={room.id} name={room.name} id={room.id} />
+              <RoomItem
+                key={room.id}
+                name={room.name}
+                handleDelete={() => deleteRoom(room.id)}
+              />
             ))}
           </div>
         ) : (
