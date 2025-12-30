@@ -2,7 +2,7 @@ import {Header} from '../../components/Header';
 import {ConnectedUsers} from './ConnectedUsers/ConnectedUsers';
 import {Rooms} from './Rooms/Rooms';
 import {MessageWrapper} from './MessageWrapper/MessageWrapper';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {socket} from '../../socket';
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
 
 export const Chat = (props: Props) => {
   const {user, setUser} = props;
+  const [selectedRoomId, setSelectedRoomId] = useState(1);
 
   useEffect(() => {
     if (user) {
@@ -29,9 +30,12 @@ export const Chat = (props: Props) => {
       <div className="main">
         <div className="left-column">
           <ConnectedUsers />
-          <Rooms />
+          <Rooms
+            selectedRoomId={selectedRoomId}
+            setSelectedRoomId={setSelectedRoomId}
+          />
         </div>
-        <MessageWrapper user={user} />
+        <MessageWrapper user={user} selectedRoomId={selectedRoomId} />
       </div>
     </>
   );

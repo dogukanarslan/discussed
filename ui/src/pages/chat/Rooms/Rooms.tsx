@@ -3,9 +3,15 @@ import {useEffect, useState} from 'react';
 import './Rooms.css';
 import {RoomItem} from './RoomItem';
 
-export const Rooms = () => {
+interface Props {
+  selectedRoomId: number;
+  setSelectedRoomId: (roomId: number) => void;
+}
+
+export const Rooms = (props: Props) => {
+  const {selectedRoomId, setSelectedRoomId} = props;
+
   const [roomName, setRoomName] = useState('');
-  const [selectedRoom, setSelectedRoom] = useState(1);
   const [rooms, setRooms] = useState<{name: string; id: number}[]>([]);
 
   useEffect(() => {
@@ -53,7 +59,7 @@ export const Rooms = () => {
   };
 
   const changeRoom = (roomId: number) => {
-    setSelectedRoom(roomId);
+    setSelectedRoomId(roomId);
   };
 
   return (
@@ -68,7 +74,7 @@ export const Rooms = () => {
                 name={room.name}
                 handleDelete={() => deleteRoom(room.id)}
                 changeRoom={() => changeRoom(room.id)}
-                selected={selectedRoom === room.id}
+                selected={selectedRoomId === room.id}
               />
             ))}
           </div>

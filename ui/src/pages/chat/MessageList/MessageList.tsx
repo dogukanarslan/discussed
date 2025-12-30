@@ -15,10 +15,11 @@ type TMsg = {
 
 interface Props {
   user: {username: string};
+  selectedRoomId: number;
 }
 
 export const MessageList = (props: Props) => {
-  const {user} = props;
+  const {user, selectedRoomId} = props;
 
   const [msgs, setMsgs] = useState<TMsg[]>([]);
   const ref = useRef<HTMLDivElement>(null);
@@ -38,12 +39,12 @@ export const MessageList = (props: Props) => {
   }, [msgs]);
 
   useEffect(() => {
-    fetch(`/api/messages`)
+    fetch(`/api/messages/${selectedRoomId}`)
       .then((res) => res.json())
       .then((data) => {
         setMsgs(data);
       });
-  }, []);
+  }, [selectedRoomId]);
 
   useEffect(() => {
     socket.on('message', (data: TMsg) => {
