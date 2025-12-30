@@ -77,7 +77,7 @@ export const Rooms = () => {
           placeholder="Room name"
         />
         <div>
-          <button>+</button>
+          <button>{`\u002b`}</button>
         </div>
       </form>
     </div>

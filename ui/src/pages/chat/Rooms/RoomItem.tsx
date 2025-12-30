@@ -12,7 +12,7 @@ export const RoomItem = (props: Props) => {
     <div className="room-item">
       <div className="room-item__name">{name}</div>
       <button className="room-item__delete-btn" onClick={handleDelete}>
-        X
+        {`\u2613`}
       </button>
     </div>
   );
