@@ -1,6 +1,8 @@
 .room-item {
   display: flex;
   align-items: center;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .room-item + .room-item {
@@ -14,4 +16,9 @@
 .room-item__delete-btn {
   background-color: unset;
   color: red;
+}
+
+.room-item__selected {
+  background: #f2f2f2;
+  border-radius: 10px;
 }

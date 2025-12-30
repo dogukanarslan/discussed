@@ -5,6 +5,7 @@ import {RoomItem} from './RoomItem';
 
 export const Rooms = () => {
   const [roomName, setRoomName] = useState('');
+  const [selectedRoom, setSelectedRoom] = useState(1);
   const [rooms, setRooms] = useState<{name: string; id: number}[]>([]);
 
   useEffect(() => {
@@ -51,6 +52,10 @@ export const Rooms = () => {
     });
   };
 
+  const changeRoom = (roomId: number) => {
+    setSelectedRoom(roomId);
+  };
+
   return (
     <div className="rooms">
       <h4>Rooms</h4>
@@ -62,6 +67,8 @@ export const Rooms = () => {
                 key={room.id}
                 name={room.name}
                 handleDelete={() => deleteRoom(room.id)}
+                changeRoom={() => changeRoom(room.id)}
+                selected={selectedRoom === room.id}
               />
             ))}
           </div>
