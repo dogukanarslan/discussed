@@ -14,7 +14,6 @@ export const MessageService = {
   },
   getByRoomId(roomId) {
     const msgs = MessageModel.getByRoomId(roomId);
-    console.log(msgs)
     if (!msgs) {
       throw {status: 404, message: 'Messages not found'};
     }
