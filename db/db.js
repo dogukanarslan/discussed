@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
 
 export const database = new DatabaseSync(
-  `${process.env.HOME}/${process.env.DB}`
+  `${process.env.DB}`
 );
 
 const __filename = fileURLToPath(import.meta.url);
