@@ -5,16 +5,21 @@ import './MessageWrapper.css';
 
 interface Props {
   user: { username: string };
-  selectedRoomId: number;
+  selectedRoom?: { id: number; name: string };
 }
 
 export const MessageWrapper = (props: Props) => {
-  const { user, selectedRoomId } = props;
+  const { user, selectedRoom } = props;
+
+  if(!selectedRoom) {
+    return;
+  }
 
   return (
     <div className="message-wrapper">
-      <MessageList user={user} selectedRoomId={selectedRoomId} />
-      <MessageForm roomId={selectedRoomId} />
+      <div><b>Room: </b>{selectedRoom.name}</div>
+      <MessageList user={user} selectedRoomId={selectedRoom.id} />
+      <MessageForm roomId={selectedRoom.id} />
     </div>
   );
 };

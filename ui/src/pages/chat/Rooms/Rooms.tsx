@@ -1,26 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import './Rooms.css';
 import { RoomItem } from './RoomItem';
 
 interface Props {
+  rooms: { name: string; id: number }[];
+  setRooms: (newRooms: { id: number; name: string }[]) => void;
   selectedRoomId: number;
   setSelectedRoomId: (roomId: number) => void;
 }
 
 export const Rooms = (props: Props) => {
-  const { selectedRoomId, setSelectedRoomId } = props;
+  const { rooms, setRooms, selectedRoomId, setSelectedRoomId } = props;
 
   const [roomName, setRoomName] = useState('');
-  const [rooms, setRooms] = useState<{ name: string; id: number }[]>([]);
-
-  useEffect(() => {
-    fetch(`/api/rooms`)
-      .then((res) => res.json())
-      .then((data) => {
-        setRooms(data);
-      });
-  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -13,12 +13,21 @@ interface Props {
 export const Chat = (props: Props) => {
   const { user, setUser } = props;
   const [selectedRoomId, setSelectedRoomId] = useState(1);
+  const [rooms, setRooms] = useState<{ name: string; id: number }[]>([]);
 
   useEffect(() => {
     if (user) {
       socket.emit('user:join', user);
     }
   }, [user]);
+
+  useEffect(() => {
+    fetch(`/api/rooms`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRooms(data);
+      });
+  }, []);
 
   if (!user) {
     return;
@@ -31,11 +40,16 @@ export const Chat = (props: Props) => {
         <div className="left-column">
           <ConnectedUsers />
           <Rooms
+            rooms={rooms}
+            setRooms={setRooms}
             selectedRoomId={selectedRoomId}
             setSelectedRoomId={setSelectedRoomId}
           />
         </div>
-        <MessageWrapper user={user} selectedRoomId={selectedRoomId} />
+        <MessageWrapper
+          user={user}
+          selectedRoom={rooms.find((room) => room.id === selectedRoomId)}
+        />
       </div>
     </>
   );
