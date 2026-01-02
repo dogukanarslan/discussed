@@ -34,11 +34,13 @@ export const MessageModel = {
       throw e;
     }
   },
-  create(user_id, message) {
+  create(user_id, message, room_id) {
     try {
       const result = database
-        .prepare('INSERT INTO messages (user_id, message) VALUES (?, ?)')
-        .run(user_id, message);
+        .prepare(
+          'INSERT INTO messages (user_id, message, room_id) VALUES (?, ?, ?)',
+        )
+        .run(user_id, message, room_id);
       return { id: result.lastInsertRowid };
     } catch (e) {
       throw e;

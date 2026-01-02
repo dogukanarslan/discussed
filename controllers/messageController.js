@@ -23,8 +23,8 @@ export const store = (req, res) => {
   try {
     const io = req.app.get('socketio');
 
-    const { user_id, message } = req.body;
-    const msg = MessageService.create({ user_id, message });
+    const { user_id, message, room_id } = req.body;
+    const msg = MessageService.create({ user_id, message, room_id });
 
     io.emit('message', msg);
     res.sendStatus(201);

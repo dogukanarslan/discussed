@@ -2,7 +2,13 @@ import { useState } from 'react';
 
 import './MessageForm.css';
 
-export const MessageForm = () => {
+interface Props {
+  roomId: number;
+}
+
+export const MessageForm = (props: Props) => {
+  const { roomId } = props;
+
   const [msg, setMsg] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,6 +28,7 @@ export const MessageForm = () => {
       body: JSON.stringify({
         user_id: user.id,
         message: msg,
+        room_id: roomId,
       }),
     }).then(() => {
       setMsg('');

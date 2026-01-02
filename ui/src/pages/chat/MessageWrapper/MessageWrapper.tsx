@@ -14,7 +14,7 @@ export const MessageWrapper = (props: Props) => {
   return (
     <div className="message-wrapper">
       <MessageList user={user} selectedRoomId={selectedRoomId} />
-      <MessageForm />
+      <MessageForm roomId={selectedRoomId} />
     </div>
   );
 };
