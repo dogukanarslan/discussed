@@ -7,6 +7,7 @@ import { router as MessageRoute } from './routes/messagesRoute.js';
 import { router as AuthRoute } from './routes/authRoute.js';
 import { router as RoomRoute } from './routes/roomRoute.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import type { Request, Response, NextFunction } from 'express';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,26 +24,31 @@ const io = new Server(httpServer, {
 const connectedUsers = new Map();
 
 io.on('connection', (socket) => {
+  let userId: number;
   socket.on('user:join', (user) => {
     if (!user.id || !user.username) {
       return;
     }
 
-    socket.userId = user.id;
+    userId = user.id;
     connectedUsers.set(user.id, user);
 
     io.emit('users:update', Array.from(connectedUsers.values()));
   });
 
   socket.on('disconnect', () => {
-    if (socket.userId) {
-      connectedUsers.delete(socket.userId);
+    if (userId) {
+      connectedUsers.delete(userId);
     }
     io.emit('users:update', Array.from(connectedUsers.values()));
   });
 });
 
-var allowCrossDomain = function (req, res, next) {
+var allowCrossDomain = function (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Allow-Methods', '*');
@@ -62,7 +68,7 @@ app.use('/messages', MessageRoute);
 app.use('/rooms', RoomRoute);
 app.use('/', AuthRoute);
 app.use(errorHandler);
-
-const server = httpServer.listen(process.env.PORT || 3000, () => {
-  console.log('server is runnning on port ', server.address().port);
+const PORT = process.env.PORT || 3000;
+httpServer.listen(PORT, () => {
+  console.log('server is runnning on port ', PORT);
 });
