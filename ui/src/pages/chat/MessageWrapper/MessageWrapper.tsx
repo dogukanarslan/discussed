@@ -17,7 +17,6 @@ export const MessageWrapper = (props: Props) => {
 
   return (
     <div className="message-wrapper">
-      <div><b>Room: </b>{selectedRoom.name}</div>
       <MessageList user={user} selectedRoomId={selectedRoom.id} />
       <MessageForm roomId={selectedRoom.id} />
     </div>
