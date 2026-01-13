@@ -1,4 +1,4 @@
-import { UserService } from '../services/UserService.js';
+import { UserService } from '../services/UserService.ts';
 import type { Request, Response, NextFunction } from 'express';
 
 export const signin = (req: Request, res: Response, next: NextFunction) => {
@@ -7,7 +7,7 @@ export const signin = (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = UserService.signin(username, password);
     if (!user) {
-      return;
+      throw Error('User not found')
     }
     res.cookie('jwt', user.token);
 
