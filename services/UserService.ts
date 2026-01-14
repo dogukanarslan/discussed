@@ -25,7 +25,13 @@ export const UserService = {
         throw { status: 400, message: 'Invalid credentials' };
       }
 
-      const token = jwt.sign(user, process.env.JWT_SECRET!, { expiresIn: '1h' });
+      const token = jwt.sign(
+        { username: user.username },
+        process.env.JWT_SECRET!,
+        {
+          expiresIn: '1h',
+        },
+      );
 
       return { id: user.id, username: user.username, token };
     } catch (e) {
@@ -44,7 +50,7 @@ export const UserService = {
     UserModel.create(username, hashedPassword);
     const user = UserModel.get(username);
     if (!user) {
-      return;
+      throw Error('User creation failed');
     }
     const token = jwt.sign(user, process.env.JWT_SECRET!, { expiresIn: '1h' });
     return { ...user, token };
