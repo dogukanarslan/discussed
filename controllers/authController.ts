@@ -7,15 +7,12 @@ export const signin = (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = UserService.signin(username, password);
     if (!user) {
-      throw Error('User not found')
+      return next({ status: 404, message: 'User not found' });
     }
     res.cookie('jwt', user.token);
-
-    return res.status(200).json(user);
+    return res.status(200).json({ username: user.username });
   } catch (e) {
-    if (e instanceof Error) {
-      throw { message: e.message };
-    }
+    next(e);
   }
 };
 
@@ -29,10 +26,10 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
       username: string;
     };
     if (!user) {
-      return;
+      return next({ status: 400, message: 'Error creating user' });
     }
     res.cookie('jwt', user.token);
-    res.status(201).json({ id: user.id, username: user.username });
+    res.status(201).json({ username: user.username });
   } catch (e) {
     if (e instanceof Error && 'errcode' in e) {
       if (e.errcode === 2067) {
