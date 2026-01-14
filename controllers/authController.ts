@@ -1,5 +1,6 @@
-import { UserService } from '../services/UserService.ts';
 import type { Request, Response, NextFunction } from 'express';
+
+import { UserService } from '../services/UserService.ts';
 
 export const signin = (req: Request, res: Response, next: NextFunction) => {
   const { username, password } = req.body;

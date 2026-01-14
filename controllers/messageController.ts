@@ -1,25 +1,30 @@
 import { MessageService } from '../services/MessageService.js';
+import type { Request, Response, NextFunction } from 'express';
 
-export const index = (req, res) => {
+export const index = (req: Request, res: Response, next: NextFunction) => {
   try {
     const messages = MessageService.getAll();
     res.send(messages);
   } catch (e) {
-    return res.status(500).json({ error: e.message });
+    next(e);
   }
 };
 
-export const getByRoomId = (req, res) => {
+export const getByRoomId = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { roomId } = req.params;
     const messages = MessageService.getByRoomId(roomId);
     res.send(messages);
   } catch (e) {
-    return res.status(500).json({ error: e.message });
+    next(e);
   }
 };
 
-export const store = (req, res) => {
+export const store = (req: Request, res: Response, next: NextFunction) => {
   try {
     const io = req.app.get('socketio');
 
@@ -29,6 +34,6 @@ export const store = (req, res) => {
     io.emit('message', msg);
     res.sendStatus(201);
   } catch (e) {
-    res.status(400).json({ error: e.message });
+    next(e);
   }
 };
