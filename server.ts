@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { Server } from 'socket.io';
 
 import { router as MessageRoute } from './routes/messagesRoute.ts';
-import { router as AuthRoute } from './routes/authRoute.js';
+import { router as AuthRoute } from './routes/authRoute.ts';
 import { router as RoomRoute } from './routes/roomRoute.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import type { Request, Response, NextFunction } from 'express';
