@@ -21,7 +21,7 @@ export const Message = (props: Props) => {
       <div>
         <b>{isCurrentUser ? 'You' : message.username}</b>: {message.message}
       </div>
-      <p>{formatTime(message.created_at)}</p>
+      <div className='message__date'>{formatTime(message.created_at)}</div>
     </div>
   );
 };
