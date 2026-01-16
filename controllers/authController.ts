@@ -11,7 +11,7 @@ export const signin = (req: Request, res: Response, next: NextFunction) => {
       return next({ status: 404, message: 'User not found' });
     }
     res.cookie('jwt', user.token);
-    return res.status(200).json({ username: user.username });
+    return res.status(200).json({ username: user.username, id: user.id });
   } catch (e) {
     next(e);
   }
