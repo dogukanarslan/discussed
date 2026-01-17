@@ -18,6 +18,7 @@ body {
   --primary-color: silver;
   --message-form-height: 60px;
   --header-height: 60px;
+  --border-radius: 10px;
 }
 
 * {
@@ -37,8 +38,8 @@ ul {
 
 button {
   border-style: solid;
-  padding: 12px;
-  border-radius: 5px;
+  padding: 6px 12px;
+  border-radius: var(--border-radius);
   border-color: transparent;
   cursor: pointer;
   background-color: var(--primary-color);

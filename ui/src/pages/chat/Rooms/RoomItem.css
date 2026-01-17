@@ -19,6 +19,6 @@
 }
 
 .room-item__selected {
-  background: #f2f2f2;
-  border-radius: 10px;
+  background: var(--primary-color);
+  border-radius: var(--border-radius);
 }
