@@ -60,7 +60,7 @@ export const Rooms = (props: Props) => {
       <h4>Rooms</h4>
       <div>
         {rooms.length > 0 ? (
-          <div>
+          <>
             {rooms.map((room) => (
               <RoomItem
                 key={room.id}
@@ -70,7 +70,7 @@ export const Rooms = (props: Props) => {
                 selected={selectedRoomId === room.id}
               />
             ))}
-          </div>
+          </>
         ) : (
           'No connected users'
         )}
