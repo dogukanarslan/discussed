@@ -1,4 +1,4 @@
-import { MessageModel } from '../models/messageModel.js';
+import { MessageModel } from '../models/messageModel.ts';
 
 export const MessageService = {
   getAll() {
