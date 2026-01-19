@@ -1,4 +1,4 @@
-import { RoomModel } from '../models/roomModel.js';
+import { RoomModel } from '../models/roomModel.ts';
 
 export const RoomService = {
   getById(roomId) {
