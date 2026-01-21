@@ -65,10 +65,13 @@ app.use(allowCrossDomain);
 
 app.set('socketio', io);
 
+// Routes
 app.use('/messages', MessageRoute);
 app.use('/rooms', RoomRoute);
 app.use('/', AuthRoute);
+
 app.use(errorHandler);
+
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
   console.log('server is runnning on port ', PORT);
