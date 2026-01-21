@@ -11,7 +11,11 @@ export const index = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export const store = (req: Request, res: Response, next: NextFunction) => {
+export const store = (
+  req: Request<{}, {}, { name: string; user_id: number }>,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { name, user_id } = req.body;
     const room = RoomService.create({ name, user_id });
@@ -31,4 +35,3 @@ export const deleteRoom = (req: Request, res: Response, next: NextFunction) => {
     next(e);
   }
 };
-  

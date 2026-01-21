@@ -17,14 +17,19 @@ export const signin = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export const signup = (req: Request, res: Response, next: NextFunction) => {
+export const signup = (
+  req: Request<{}, {}, { username: string; password: string }>,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { username, password } = req.body;
 
-    const user = UserService.signup(username, password) as {
+    const user = UserService.signup(username, password) as unknown as {
       token: string;
       id: string;
       username: string;
+      created_at: string;
     };
     if (!user) {
       return next({ status: 400, message: 'Error creating user' });

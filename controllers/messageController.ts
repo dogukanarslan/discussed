@@ -11,7 +11,7 @@ export const index = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export const getByRoomId = (
-  req: Request,
+  req: Request<{ roomId: number }>,
   res: Response,
   next: NextFunction,
 ) => {
