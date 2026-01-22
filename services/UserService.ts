@@ -11,38 +11,40 @@ export const UserService = {
       };
     }
 
-    try {
-      const user = UserModel.get(username);
-      if (!user) {
-        throw { status: 404, message: 'User not found' };
-      }
-
-      if (
-        user.password &&
-        typeof user.password === 'string' &&
-        !bcrypt.compareSync(password, user.password)
-      ) {
-        throw { status: 400, message: 'Invalid credentials' };
-      }
-
-      const token = jwt.sign(
-        { username: user.username },
-        process.env.JWT_SECRET!,
-        {
-          expiresIn: '1h',
-        },
-      );
-
-      return { id: user.id, username: user.username, token };
-    } catch (e) {
-      if (e instanceof Error) {
-        throw Error(e.message);
-      }
+    if (typeof password !== 'string') {
+      throw { status: 400, message: 'invalid input type' };
     }
+
+    const user = UserModel.get(username);
+    if (!user) {
+      throw { status: 404, message: 'User not found' };
+    }
+
+    if (
+      user.password &&
+      typeof user.password === 'string' &&
+      !bcrypt.compareSync(password, user.password)
+    ) {
+      throw { status: 400, message: 'Invalid credentials' };
+    }
+
+    const token = jwt.sign(
+      { username: user.username },
+      process.env.JWT_SECRET!,
+      {
+        expiresIn: '1h',
+      },
+    );
+
+    return { id: user.id, username: user.username, token };
   },
   signup(username: string, password: string) {
     if (!username || !password) {
       throw { status: 400, message: 'username and password are required' };
+    }
+
+    if (typeof password !== 'string') {
+      throw { status: 400, message: 'invalid input type' };
     }
 
     const saltRounds = 10;
