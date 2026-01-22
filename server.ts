@@ -7,8 +7,9 @@ import { Server } from 'socket.io';
 import { router as MessageRoute } from './routes/messagesRoute.ts';
 import { router as AuthRoute } from './routes/authRoute.ts';
 import { router as RoomRoute } from './routes/roomRoute.js';
-import { errorHandler } from './middlewares/errorHandler.js';
+import { errorHandler } from './middlewares/errorHandler.ts';
 import type { Request, Response, NextFunction } from 'express';
+import { validateToken } from './middlewares/validateToken.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -66,8 +67,8 @@ app.use(allowCrossDomain);
 app.set('socketio', io);
 
 // Routes
-app.use('/messages', MessageRoute);
-app.use('/rooms', RoomRoute);
+app.use('/messages', validateToken, MessageRoute);
+app.use('/rooms', validateToken, RoomRoute);
 app.use('/', AuthRoute);
 
 app.use(errorHandler);
