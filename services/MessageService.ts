@@ -4,7 +4,7 @@ export const MessageService = {
   getAll() {
     return MessageModel.getAll();
   },
-  getById(msgId) {
+  getById(msgId: number) {
     const msg = MessageModel.get(msgId);
     if (!msg) {
       throw { status: 404, message: 'Message not found' };
@@ -12,7 +12,7 @@ export const MessageService = {
 
     return msg;
   },
-  getByRoomId(roomId) {
+  getByRoomId(roomId: number) {
     const msgs = MessageModel.getByRoomId(roomId);
     if (!msgs) {
       throw { status: 404, message: 'Messages not found' };
@@ -20,7 +20,15 @@ export const MessageService = {
 
     return msgs;
   },
-  create({ user_id, message ,room_id}) {
+  create({
+    user_id,
+    message,
+    room_id,
+  }: {
+    user_id: number;
+    message: string;
+    room_id: number;
+  }) {
     if (!user_id) {
       throw { status: 400, message: 'user_id is required' };
     }
@@ -29,7 +37,7 @@ export const MessageService = {
       throw { status: 400, message: 'message is required' };
     }
 
-    const { id } = MessageModel.create(user_id, message,room_id);
+    const { id } = MessageModel.create(user_id, message, room_id);
     return MessageModel.get(id);
   },
 };

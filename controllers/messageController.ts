@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import { MessageService } from '../services/MessageService.js';
+import { MessageService } from '../services/MessageService.ts';
 
 export const index = (req: Request, res: Response, next: NextFunction) => {
   try {
