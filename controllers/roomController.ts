@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 
-import { RoomService } from '../services/RoomService.js';
+import { RoomService } from '../services/RoomService.ts';
 
 export const index = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -29,7 +29,7 @@ export const store = (
 export const deleteRoom = (req: Request, res: Response, next: NextFunction) => {
   try {
     const { roomId } = req.params;
-    RoomService.delete(roomId);
+    RoomService.delete(parseInt(roomId));
     res.sendStatus(204);
   } catch (e) {
     next(e);
