@@ -6,7 +6,7 @@ import { Server } from 'socket.io';
 
 import { router as MessageRoute } from './routes/messagesRoute.ts';
 import { router as AuthRoute } from './routes/authRoute.ts';
-import { router as RoomRoute } from './routes/roomRoute.js';
+import { router as RoomRoute } from './routes/roomRoute.ts';
 import { errorHandler } from './middlewares/errorHandler.ts';
 import type { Request, Response, NextFunction } from 'express';
 import { validateToken } from './middlewares/validateToken.js';
