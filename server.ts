@@ -9,7 +9,7 @@ import { router as AuthRoute } from './routes/authRoute.ts';
 import { router as RoomRoute } from './routes/roomRoute.ts';
 import { errorHandler } from './middlewares/errorHandler.ts';
 import type { Request, Response, NextFunction } from 'express';
-import { validateToken } from './middlewares/validateToken.js';
+import { validateToken } from './middlewares/validateToken.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
