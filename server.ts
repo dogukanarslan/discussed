@@ -1,4 +1,5 @@
 import express from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,7 +9,6 @@ import { router as MessageRoute } from './routes/messagesRoute.ts';
 import { router as AuthRoute } from './routes/authRoute.ts';
 import { router as RoomRoute } from './routes/roomRoute.ts';
 import { errorHandler } from './middlewares/errorHandler.ts';
-import type { Request, Response, NextFunction } from 'express';
 import { validateToken } from './middlewares/validateToken.ts';
 
 const __filename = fileURLToPath(import.meta.url);
