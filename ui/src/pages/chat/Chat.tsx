@@ -12,6 +12,7 @@ interface Props {
 
 export const Chat = (props: Props) => {
   const { user, setUser } = props;
+
   const [selectedRoomId, setSelectedRoomId] = useState(1);
   const [rooms, setRooms] = useState<{ name: string; id: number }[]>([]);
 
@@ -46,10 +47,7 @@ export const Chat = (props: Props) => {
             setSelectedRoomId={setSelectedRoomId}
           />
         </div>
-        <MessageWrapper
-          user={user}
-          selectedRoom={rooms.find((room) => room.id === selectedRoomId)}
-        />
+        <MessageWrapper user={user} selectedRoomId={selectedRoomId} />
       </div>
     </>
   );
