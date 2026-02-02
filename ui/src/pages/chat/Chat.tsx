@@ -36,7 +36,6 @@ export const Chat = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log(window.location.hash);
     if (!location.pathname) {
       navigate('/chat');
     }
