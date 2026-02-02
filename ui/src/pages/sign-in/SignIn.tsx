@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import { socket } from '../../socket';
 
@@ -12,6 +13,8 @@ export const SignIn = (props: Props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +37,7 @@ export const SignIn = (props: Props) => {
         sessionStorage.setItem('user', JSON.stringify(data));
         socket.emit('user:join', data);
         setUser({ username: data.username });
-        window.location.hash = '#chat';
+        navigate('/');
       })
       .catch((e) => {
         setError(e.message);

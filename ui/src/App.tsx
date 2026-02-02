@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Router } from './Router';
+import { useState } from 'react';
+import { createHashRouter, RouterProvider } from 'react-router';
+
 import { SignUp } from './pages/sign-up/SignUp';
 import { SignIn } from './pages/sign-in/SignIn';
 import { Chat } from './pages/chat/Chat';
@@ -11,27 +12,13 @@ function App() {
     storageUser ? JSON.parse(storageUser) : null,
   );
 
-  useEffect(() => {
-    if (!window.location.hash) {
-      window.location.hash = '#chat';
-    }
+  const router = createHashRouter([
+    { path: '/chat', element: <Chat setUser={setUser} user={user} /> },
+    { path: '/signin', element: <SignIn setUser={setUser} /> },
+    { path: '/signup', element: <SignUp setUser={setUser} /> },
+  ]);
 
-    if (
-      !user &&
-      window.location.hash !== '#signin' &&
-      window.location.hash !== '#signup'
-    ) {
-      window.location.hash = '#signin';
-    }
-  }, [user]);
-
-  const routes = {
-    '#signin': <SignIn setUser={setUser} />,
-    '#signup': <SignUp setUser={setUser} />,
-    '#chat': <Chat user={user} setUser={setUser} />,
-  };
-
-  return <Router>{routes}</Router>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from 'react-router';
 import { Header } from '../../components/Header';
 import { ConnectedUsers } from './ConnectedUsers/ConnectedUsers';
 import { Rooms } from './Rooms/Rooms';
@@ -16,6 +17,10 @@ export const Chat = (props: Props) => {
   const [selectedRoomId, setSelectedRoomId] = useState(1);
   const [rooms, setRooms] = useState<{ name: string; id: number }[]>([]);
 
+  const location = useLocation();
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (user) {
       socket.emit('user:join', user);
@@ -29,6 +34,21 @@ export const Chat = (props: Props) => {
         setRooms(data);
       });
   }, []);
+
+  useEffect(() => {
+    console.log(window.location.hash);
+    if (!location.pathname) {
+      navigate('/chat');
+    }
+
+    if (
+      !user &&
+      location.pathname !== 'signin' &&
+      location.pathname !== 'signup'
+    ) {
+      navigate('signin');
+    }
+  }, [user, location, navigate]);
 
   if (!user) {
     return;
