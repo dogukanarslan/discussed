@@ -13,7 +13,7 @@ function App() {
   );
 
   const router = createHashRouter([
-    { path: '/chat', element: <Chat setUser={setUser} user={user} /> },
+    { path: '/', element: <Chat setUser={setUser} user={user} /> },
     { path: '/signin', element: <SignIn setUser={setUser} /> },
     { path: '/signup', element: <SignUp setUser={setUser} /> },
   ]);

@@ -36,16 +36,12 @@ export const Chat = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    if (!location.pathname) {
-      navigate('/chat');
-    }
-
     if (
       !user &&
       location.pathname !== 'signin' &&
       location.pathname !== 'signup'
     ) {
-      navigate('signin');
+      navigate('/signin');
     }
   }, [user, location, navigate]);
 
