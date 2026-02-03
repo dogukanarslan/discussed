@@ -72,7 +72,7 @@ export const Rooms = (props: Props) => {
             ))}
           </>
         ) : (
-          'No connected users'
+          'No rooms created'
         )}
       </div>
       <form className="room-form" onSubmit={handleSubmit}>
