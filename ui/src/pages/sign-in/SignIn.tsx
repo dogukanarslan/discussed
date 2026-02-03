@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { socket } from '../../socket';
-
 interface Props {
   setUser: (user: { username: string }) => void;
 }
@@ -35,7 +33,6 @@ export const SignIn = (props: Props) => {
       })
       .then((data) => {
         sessionStorage.setItem('user', JSON.stringify(data));
-        socket.emit('user:join', data);
         setUser({ username: data.username });
         navigate('/');
       })

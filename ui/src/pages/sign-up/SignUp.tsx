@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { socket } from '../../socket';
-
 interface Props {
   setUser: (user: { username: string }) => void;
 }
@@ -32,7 +30,6 @@ export const SignUp = (props: Props) => {
       })
       .then((data) => {
         sessionStorage.setItem('user', JSON.stringify(data));
-        socket.emit('user:join', data);
         setUser({ username: data.username });
         window.location.hash = '#chat';
       })

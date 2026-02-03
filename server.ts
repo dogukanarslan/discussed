@@ -23,29 +23,6 @@ const io = new Server(httpServer, {
   serveClient: false,
 });
 
-const connectedUsers = new Map();
-
-io.on('connection', (socket) => {
-  let userId: number;
-  socket.on('user:join', (user) => {
-    if (!user.id || !user.username) {
-      return;
-    }
-
-    userId = user.id;
-    connectedUsers.set(user.id, user);
-
-    io.emit('users:update', Array.from(connectedUsers.values()));
-  });
-
-  socket.on('disconnect', () => {
-    if (userId) {
-      connectedUsers.delete(userId);
-    }
-    io.emit('users:update', Array.from(connectedUsers.values()));
-  });
-});
-
 var allowCrossDomain = function (
   req: Request,
   res: Response,

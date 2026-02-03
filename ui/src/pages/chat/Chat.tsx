@@ -1,10 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { Header } from '../../components/Header';
-import { ConnectedUsers } from './ConnectedUsers/ConnectedUsers';
 import { Rooms } from './Rooms/Rooms';
 import { MessageWrapper } from './MessageWrapper/MessageWrapper';
-import { useEffect, useState } from 'react';
-import { socket } from '../../socket';
 
 interface Props {
   user: { username: string };
@@ -20,12 +18,6 @@ export const Chat = (props: Props) => {
   const location = useLocation();
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      socket.emit('user:join', user);
-    }
-  }, [user]);
 
   useEffect(() => {
     fetch(`/api/rooms`)
@@ -53,15 +45,12 @@ export const Chat = (props: Props) => {
     <>
       <Header user={user} setUser={setUser} />
       <div className="main">
-        <div className="left-column">
-          <ConnectedUsers />
-          <Rooms
-            rooms={rooms}
-            setRooms={setRooms}
-            selectedRoomId={selectedRoomId}
-            setSelectedRoomId={setSelectedRoomId}
-          />
-        </div>
+        <Rooms
+          rooms={rooms}
+          setRooms={setRooms}
+          selectedRoomId={selectedRoomId}
+          setSelectedRoomId={setSelectedRoomId}
+        />
         <MessageWrapper user={user} selectedRoomId={selectedRoomId} />
       </div>
     </>
