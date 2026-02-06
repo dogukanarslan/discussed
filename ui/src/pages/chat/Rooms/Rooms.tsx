@@ -6,7 +6,7 @@ import { RoomItem } from './RoomItem';
 interface Props {
   rooms: { name: string; id: number }[];
   setRooms: (newRooms: { id: number; name: string }[]) => void;
-  selectedRoomId: number;
+  selectedRoomId?: number;
   setSelectedRoomId: (roomId: number) => void;
 }
 
