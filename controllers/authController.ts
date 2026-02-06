@@ -35,7 +35,7 @@ export const signup = (
       return next({ status: 400, message: 'Error creating user' });
     }
     res.cookie('jwt', user.token);
-    res.status(201).json({ username: user.username });
+    res.status(201).json({ username: user.username, id: user.id });
   } catch (e) {
     if (e instanceof Error && 'errcode' in e && e.errcode === 2067) {
       return next({ status: 409, message: 'Username already exists' });
