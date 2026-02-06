@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './Rooms.css';
 import { RoomItem } from './RoomItem';
@@ -54,6 +54,12 @@ export const Rooms = (props: Props) => {
   const changeRoom = (roomId: number) => {
     setSelectedRoomId(roomId);
   };
+
+  useEffect(() => {
+    if (rooms.length > 0 && rooms[0].id) {
+      setSelectedRoomId(rooms[0].id);
+    }
+  }, [rooms, setSelectedRoomId]);
 
   return (
     <div className="rooms">
