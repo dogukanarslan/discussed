@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 interface Props {
   setUser: (user: { username: string }) => void;
@@ -10,6 +11,8 @@ export const SignUp = (props: Props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +34,7 @@ export const SignUp = (props: Props) => {
       .then((data) => {
         sessionStorage.setItem('user', JSON.stringify(data));
         setUser({ username: data.username });
-        window.location.hash = '#chat';
+        navigate('/');
       })
       .catch((e) => {
         setError(e.message);
