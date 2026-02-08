@@ -47,6 +47,7 @@ export const Rooms = (props: Props) => {
     }).then((res) => {
       if (res.ok) {
         setRooms(rooms.filter((room) => room.id !== roomId));
+        setSelectedRoomId(undefined);
       }
     });
   };
