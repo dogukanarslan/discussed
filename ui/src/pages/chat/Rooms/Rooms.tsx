@@ -48,7 +48,7 @@ export const Rooms = (props: Props) => {
       if (res.ok) {
         setRooms(rooms.filter((room) => room.id !== roomId));
         if (selectedRoomId === roomId) {
-        setSelectedRoomId(undefined);
+          setSelectedRoomId(undefined);
         }
       }
     });
@@ -67,23 +67,25 @@ export const Rooms = (props: Props) => {
   return (
     <div className="rooms">
       <h4>Rooms</h4>
-      <div>
-        {rooms.length > 0 ? (
-          <>
-            {rooms.map((room) => (
-              <RoomItem
-                key={room.id}
-                name={room.name}
-                handleDelete={() => deleteRoom(room.id)}
-                changeRoom={() => changeRoom(room.id)}
-                selected={selectedRoomId === room.id}
-              />
-            ))}
-          </>
-        ) : (
-          'No rooms created'
+      <div className="rooms__select">
+        <select
+          value={selectedRoomId || ''}
+          onChange={(e) => changeRoom(Number(e.target.value))}
+        >
+          <option value="" hidden disabled>
+            Select a room
+          </option>
+          {rooms.map((room) => (
+            <option value={room.id} key={room.id}>
+              {room.name}
+            </option>
+          ))}
+        </select>
+        {selectedRoomId && (
+          <button onClick={() => deleteRoom(selectedRoomId)}>{`\u2613`}</button>
         )}
       </div>
+
       <form className="room-form" onSubmit={handleSubmit}>
         <input
           type="text"

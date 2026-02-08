@@ -57,6 +57,12 @@ input {
   border-radius: 5px;
 }
 
+select {
+  width: 100%;
+  padding:10px;
+  border-radius: 5px;
+}
+
 .container {
   padding: 0 16px;
   max-width: 1024px;
@@ -64,8 +70,6 @@ input {
 }
 
 .main {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
   gap: 10px;
   height: calc(100% - var(--header-height));
 }

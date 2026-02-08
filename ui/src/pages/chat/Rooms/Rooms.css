@@ -2,6 +2,7 @@
   padding: 10px;
 
   display: flex;
+  gap: 10px;
   flex-direction: column;
   .user {
     animation: slideDown 500ms ease forwards;
@@ -20,6 +21,16 @@
 
   .room + .room {
     margin-top: 10px;
+  }
+}
+
+.rooms__select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  select {
+    width: 100%;
   }
 }
 
