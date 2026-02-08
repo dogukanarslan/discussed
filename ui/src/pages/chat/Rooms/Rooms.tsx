@@ -7,7 +7,7 @@ interface Props {
   rooms: { name: string; id: number }[];
   setRooms: (newRooms: { id: number; name: string }[]) => void;
   selectedRoomId?: number;
-  setSelectedRoomId: (roomId: number) => void;
+  setSelectedRoomId: (roomId?: number) => void;
 }
 
 export const Rooms = (props: Props) => {
@@ -47,7 +47,9 @@ export const Rooms = (props: Props) => {
     }).then((res) => {
       if (res.ok) {
         setRooms(rooms.filter((room) => room.id !== roomId));
+        if (selectedRoomId === roomId) {
         setSelectedRoomId(undefined);
+        }
       }
     });
   };
