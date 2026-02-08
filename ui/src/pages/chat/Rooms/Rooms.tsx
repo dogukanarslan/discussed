@@ -56,10 +56,10 @@ export const Rooms = (props: Props) => {
   };
 
   useEffect(() => {
-    if (rooms.length > 0 && rooms[0].id) {
+    if (!selectedRoomId && rooms.length > 0 && rooms[0].id) {
       setSelectedRoomId(rooms[0].id);
     }
-  }, [rooms, setSelectedRoomId]);
+  }, [rooms, selectedRoomId, setSelectedRoomId]);
 
   return (
     <div className="rooms">
