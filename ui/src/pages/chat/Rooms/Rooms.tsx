@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import './Rooms.css';
-import { RoomItem } from './RoomItem';
 
 interface Props {
   rooms: { name: string; id: number }[];
