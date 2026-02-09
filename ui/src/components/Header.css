@@ -1,14 +1,19 @@
 .header {
   height: var(--header-height);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #f2f2f2;
-  padding: 20px;
 }
 
 .header__info {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.header__wrapper {
+  max-width: 1024px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  align-items: center;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 20px 10px;
 }

@@ -15,10 +15,10 @@ export const Header = (props: Props) => {
 
   return (
     <div className="header">
-      <h3>Discussed</h3>
-      <div className="header__info">
-        <h4 className="header__heading">{user.username}</h4>
-        <div>
+      <div className="header__wrapper">
+        <h3>Discussed</h3>
+        <div className="header__info">
+          <h4 className="header__heading">{user.username}</h4>
           <button onClick={handleSignout}>Sign out</button>
         </div>
       </div>
