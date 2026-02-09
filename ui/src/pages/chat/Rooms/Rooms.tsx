@@ -65,7 +65,6 @@ export const Rooms = (props: Props) => {
 
   return (
     <div className="rooms">
-      <h4>Rooms</h4>
       <div className="rooms__select">
         <select
           value={selectedRoomId || ''}
