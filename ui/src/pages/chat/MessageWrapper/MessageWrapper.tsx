@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react';
 import { MessageForm } from '../MessageForm/MessageForm';
-import { MessageList } from '../MessageList/MessageList';
+import { MessageList, type TMsg } from '../MessageList/MessageList';
+
+import { socket } from '../../../socket';
 
 import './MessageWrapper.css';
 
@@ -11,13 +14,54 @@ interface Props {
 export const MessageWrapper = (props: Props) => {
   const { user, selectedRoomId } = props;
 
+  const [msgs, setMsgs] = useState<TMsg[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (selectedRoomId === undefined) {
+      return;
+    }
+
+    setLoading(true);
+    fetch(`/api/messages/${selectedRoomId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMsgs(data);
+      })
+      .catch((e) => {
+        setError(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [selectedRoomId]);
+
+  useEffect(() => {
+    socket.on('message', (data: TMsg) => {
+      setMsgs((prev) => [...prev, data]);
+    });
+
+    return () => {
+      socket.off('message');
+    };
+  }, []);
+
   if (!selectedRoomId) {
     return;
   }
 
+  if (loading) {
+    return 'Loading...';
+  }
+
+  if (error) {
+    return error;
+  }
+
   return (
     <div className="message-wrapper">
-      <MessageList user={user} selectedRoomId={selectedRoomId} />
+      <MessageList user={user} msgs={msgs} />
       <MessageForm roomId={selectedRoomId} />
     </div>
   );
