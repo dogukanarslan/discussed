@@ -1,25 +1,13 @@
-import { useEffect } from 'react';
-
 import './Rooms.css';
 
 interface Props {
   rooms: { name: string; id: number }[];
   selectedRoomId?: number;
-  setSelectedRoomId: (roomId?: number) => void;
+  changeRoom: (roomId: number) => void;
 }
 
 export const Rooms = (props: Props) => {
-  const { rooms, selectedRoomId, setSelectedRoomId } = props;
-
-  const changeRoom = (roomId: number) => {
-    setSelectedRoomId(roomId);
-  };
-
-  useEffect(() => {
-    if (!selectedRoomId && rooms.length > 0 && rooms[0].id) {
-      setSelectedRoomId(rooms[0].id);
-    }
-  }, [rooms, selectedRoomId, setSelectedRoomId]);
+  const { rooms, selectedRoomId, changeRoom } = props;
 
   return (
     <div className="rooms">

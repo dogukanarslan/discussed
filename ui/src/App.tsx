@@ -23,7 +23,6 @@ function App() {
         { path: '/rooms', element: <Rooms /> },
       ],
     },
-
     { path: '/signin', element: <SignIn setUser={setUser} /> },
     { path: '/signup', element: <SignUp setUser={setUser} /> },
   ]);

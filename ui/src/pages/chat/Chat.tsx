@@ -35,6 +35,12 @@ export const Chat = (props: Props) => {
     }
   }, [user, location, navigate]);
 
+  useEffect(() => {
+    if (!selectedRoomId && rooms.length > 0 && rooms[0].id) {
+      setSelectedRoomId(rooms[0].id);
+    }
+  }, [rooms, selectedRoomId, setSelectedRoomId]);
+
   if (!user) {
     return;
   }
@@ -44,7 +50,7 @@ export const Chat = (props: Props) => {
       <Rooms
         rooms={rooms}
         selectedRoomId={selectedRoomId}
-        setSelectedRoomId={setSelectedRoomId}
+        changeRoom={(roomId) => setSelectedRoomId(roomId)}
       />
       {selectedRoomId && (
         <MessageWrapper user={user} selectedRoomId={selectedRoomId} />
