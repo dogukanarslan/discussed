@@ -1,5 +1,4 @@
 .rooms {
-  padding: 10px;
 
   display: flex;
   gap: 10px;
@@ -34,8 +33,3 @@
   }
 }
 
-.room-form {
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-}

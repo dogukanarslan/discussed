@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import './Header.css';
 
 interface Props {
@@ -16,7 +17,13 @@ export const Header = (props: Props) => {
   return (
     <div className="header">
       <div className="header__wrapper">
-        <h3>Discussed</h3>
+        <div className="header__left">
+          <h3>Discussed</h3>
+          <div className="header__menu">
+            <Link to="/">Chat</Link>
+            <Link to="/rooms">Rooms</Link>
+          </div>
+        </div>
         <div className="header__info">
           <h4 className="header__heading">{user.username}</h4>
           <button onClick={handleSignout}>Sign out</button>

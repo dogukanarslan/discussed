@@ -1,0 +1,25 @@
+.rooms__title {
+  margin: 0;
+}
+
+.rooms__room-item {
+  background: var(--primary-color);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.rooms__room-item + .rooms__room-item {
+  margin-top: 5px;
+}
+
+.rooms__add-form {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.rooms__room-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
