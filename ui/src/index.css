@@ -38,7 +38,7 @@ ul {
 
 button {
   border-style: solid;
-  padding: 6px 12px;
+  padding: 10px 8px;
   border-radius: var(--border-radius);
   border-color: transparent;
   cursor: pointer;

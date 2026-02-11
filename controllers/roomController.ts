@@ -12,13 +12,17 @@ export const index = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export const store = (
-  req: Request<{}, {}, { name: string; user_id: number }>,
+  req: Request<{}, {}, { name: string; description?: string; user_id: number }>,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    const { name, user_id } = req.body;
-    const room = RoomService.create({ name, user_id });
+    const { name, description, user_id } = req.body;
+    const room = RoomService.create({
+      name,
+      user_id,
+      description: description ?? null,
+    });
 
     res.status(201).json(room);
   } catch (e) {

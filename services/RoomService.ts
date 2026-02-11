@@ -12,7 +12,15 @@ export const RoomService = {
   getAll() {
     return RoomModel.getAll();
   },
-  create({ name, user_id }: { name: string; user_id: number }) {
+  create({
+    name,
+    description,
+    user_id,
+  }: {
+    name: string;
+    description: string | null;
+    user_id: number;
+  }) {
     if (!user_id) {
       throw { status: 400, message: 'user_id is required' };
     }
@@ -21,7 +29,7 @@ export const RoomService = {
       throw { status: 400, message: 'name is required' };
     }
 
-    const { id } = RoomModel.create(name, user_id);
+    const { id } = RoomModel.create(name, description, user_id);
     return RoomModel.getById(id);
   },
   delete(roomId: number) {

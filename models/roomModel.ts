@@ -24,11 +24,17 @@ export const RoomModel = {
       throw e;
     }
   },
-  create(name: string, user_id: number): { id: number } {
+  create(
+    name: string,
+    description: string | null,
+    user_id: number,
+  ): { id: number } {
     try {
       const result = database
-        .prepare('INSERT INTO rooms (name, user_id) VALUES (?, ?)')
-        .run(name, user_id);
+        .prepare(
+          'INSERT INTO rooms (name, description, user_id) VALUES (?, ?, ?)',
+        )
+        .run(name, description, user_id);
       return { id: result.lastInsertRowid as number };
     } catch (e) {
       throw e;

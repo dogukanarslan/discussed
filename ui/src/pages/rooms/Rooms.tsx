@@ -10,7 +10,8 @@ type Room = {
 export const Rooms = () => {
   const [rooms, setRooms] = useState<Room[]>();
 
-  const [roomName, setRoomName] = useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +28,7 @@ export const Rooms = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: roomName,
+        name,
         user_id: 1,
       }),
     })
@@ -38,7 +39,7 @@ export const Rooms = () => {
         } else {
           setRooms([data]);
         }
-        setRoomName('');
+        setName('');
       });
   };
 
@@ -68,13 +69,18 @@ export const Rooms = () => {
       <form className="rooms__add-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          value={roomName}
-          onChange={(e) => setRoomName(e.target.value)}
-          placeholder="Room name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Name"
         />
-        <div>
-          <button>{`\u002b`}</button>
-        </div>
+        <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+        />
+
+        <button>Create New Room</button>
       </form>
 
       {rooms && rooms.length > 0 ? (
