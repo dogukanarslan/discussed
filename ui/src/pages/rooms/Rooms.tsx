@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import './Rooms.css';
-
 type Room = {
   id: number;
   name: string;
@@ -64,9 +62,9 @@ export const Rooms = () => {
   }, []);
 
   return (
-    <div className="rooms">
-      <h3 className="rooms__title">Rooms</h3>
-      <form className="rooms__add-form" onSubmit={handleSubmit}>
+    <div className="flex flex-col gap-3">
+      <h3 className="text-xl font-semibold">Rooms</h3>
+      <form className="grid gap-2" onSubmit={handleSubmit}>
         <input
           type="text"
           value={name}
@@ -80,14 +78,17 @@ export const Rooms = () => {
           placeholder="Description"
         />
 
-        <button>Create New Room</button>
+        <button className="w-full">Create New Room</button>
       </form>
 
       {rooms && rooms.length > 0 ? (
-        <div className="rooms__list">
+        <div className="flex flex-col gap-2">
           {rooms.map((room) => (
-            <div key={room.id} className="rooms__room-item">
-              <div className="rooms__room-name">{room.name}</div>
+            <div
+              key={room.id}
+              className="flex items-center justify-between bg-primary rounded-md px-3 py-2"
+            >
+              <div className="font-medium">{room.name}</div>
               <button onClick={() => deleteRoom(room.id)}>Delete</button>
             </div>
           ))}

@@ -14,11 +14,11 @@ export const Layout = (props: Props) => {
   }
 
   return (
-    <>
+    <div className="h-full flex flex-col">
       <Header user={user} setUser={setUser} />
-      <div className="main">
+      <div className="flex flex-col gap-3 h-[calc(100%-60px)] w-full max-w-5xl mx-auto px-2 py-3">
         <Outlet />
       </div>
-    </>
+    </div>
   );
 };

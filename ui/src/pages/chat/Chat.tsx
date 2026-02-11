@@ -46,7 +46,7 @@ export const Chat = (props: Props) => {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-4 h-full">
       <Rooms
         rooms={rooms}
         selectedRoomId={selectedRoomId}
@@ -55,6 +55,6 @@ export const Chat = (props: Props) => {
       {selectedRoomId && (
         <MessageWrapper user={user} selectedRoomId={selectedRoomId} />
       )}
-    </>
+    </div>
   );
 };

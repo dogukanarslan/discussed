@@ -4,8 +4,6 @@ import { MessageList, type TMsg } from '../MessageList/MessageList';
 
 import { socket } from '../../../socket';
 
-import './MessageWrapper.css';
-
 interface Props {
   user: { username: string };
   selectedRoomId?: number;
@@ -60,7 +58,7 @@ export const MessageWrapper = (props: Props) => {
   }
 
   return (
-    <div className="message-wrapper">
+    <div className="flex flex-col w-full overflow-y-auto h-full gap-2">
       <MessageList user={user} msgs={msgs} />
       <MessageForm roomId={selectedRoomId} />
     </div>

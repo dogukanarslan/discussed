@@ -2,8 +2,6 @@ import { useEffect, useRef } from 'react';
 
 import { Message } from '../Message/Message';
 
-import './MessageList.css';
-
 export type TMsg = {
   id: number;
   username: string;
@@ -37,7 +35,7 @@ export const MessageList = (props: Props) => {
   }, [msgs]);
 
   return (
-    <div className="message-list">
+    <div className="h-full w-full overflow-y-auto flex-1">
       {msgs.length === 0 ? (
         <p>No messages</p>
       ) : (

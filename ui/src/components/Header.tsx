@@ -1,5 +1,4 @@
 import { Link } from 'react-router';
-import './Header.css';
 
 interface Props {
   user: { username: string };
@@ -15,20 +14,24 @@ export const Header = (props: Props) => {
   };
 
   return (
-    <div className="header">
-      <div className="header__wrapper">
-        <div className="header__left">
-          <h3>Discussed</h3>
-          <div className="header__menu">
-            <Link to="/">Chat</Link>
-            <Link to="/rooms">Rooms</Link>
-          </div>
+    <header className="h-header border-b border-gray-200">
+      <div className="max-w-5xl mx-auto flex items-center justify-between h-full px-2">
+        <div className="flex items-center gap-5">
+          <h3 className="text-lg font-semibold">Discussed</h3>
+          <nav className="flex gap-3 text-sm">
+            <Link to="/" className="hover:underline">
+              Chat
+            </Link>
+            <Link to="/rooms" className="hover:underline">
+              Rooms
+            </Link>
+          </nav>
         </div>
-        <div className="header__info">
-          <h4 className="header__heading">{user.username}</h4>
+        <div className="flex items-center gap-3">
+          <h4 className="text-base font-semibold">{user.username}</h4>
           <button onClick={handleSignout}>Sign out</button>
         </div>
       </div>
-    </div>
+    </header>
   );
 };

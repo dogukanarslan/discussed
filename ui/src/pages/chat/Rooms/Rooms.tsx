@@ -1,5 +1,3 @@
-import './Rooms.css';
-
 interface Props {
   rooms: { name: string; id: number }[];
   selectedRoomId?: number;
@@ -10,8 +8,8 @@ export const Rooms = (props: Props) => {
   const { rooms, selectedRoomId, changeRoom } = props;
 
   return (
-    <div className="rooms">
-      <div className="rooms__select">
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center gap-2">
         <select
           value={selectedRoomId || ''}
           onChange={(e) => changeRoom(Number(e.target.value))}

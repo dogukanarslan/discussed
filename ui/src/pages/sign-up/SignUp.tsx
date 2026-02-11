@@ -44,9 +44,12 @@ export const SignUp = (props: Props) => {
   };
 
   return (
-    <div className="auth-form">
-      <h2 className="auth-form__heading">Create a new account!</h2>
-      <form className="auth-form__form" onSubmit={handleSubmit}>
+    <div className="flex flex-col justify-center text-center h-full max-w-md mx-auto p-4 gap-6">
+      <h2 className="text-2xl font-semibold">Create a new account!</h2>
+      <form
+        className="flex flex-col items-center gap-3 w-full"
+        onSubmit={handleSubmit}
+      >
         <input
           id="username"
           value={username}
@@ -64,11 +67,14 @@ export const SignUp = (props: Props) => {
           required
         />
 
-        {error && <div className="error">{error}</div>}
-        <button>Sign up</button>
+        {error && <div className="text-red-600">{error}</div>}
+        <button className="w-full">Sign up</button>
       </form>
-      <div>
-        Already have an account? <a href="#signin">Sign in!</a>
+      <div className="text-sm text-slate-700">
+        Already have an account?{' '}
+        <a className="text-blue-600 hover:underline" href="#signin">
+          Sign in!
+        </a>
       </div>
     </div>
   );

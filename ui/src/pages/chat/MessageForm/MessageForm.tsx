@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import './MessageForm.css';
-
 interface Props {
   roomId: number;
 }
@@ -36,9 +34,12 @@ export const MessageForm = (props: Props) => {
   };
 
   return (
-    <form className="message-form" onSubmit={handleSubmit}>
+    <form
+      className="flex items-center gap-2 h-messageForm"
+      onSubmit={handleSubmit}
+    >
       <input
-        className="message-input"
+        className="text-[15px]"
         type="text"
         value={msg}
         onChange={(e) => setMsg(e.target.value)}
