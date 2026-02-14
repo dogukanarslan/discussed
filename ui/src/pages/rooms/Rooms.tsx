@@ -27,17 +27,26 @@ export const Rooms = () => {
       },
       body: JSON.stringify({
         name,
+        description,
         user_id: 1,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw Error('Error');
+        }
+
+        return res.json();
+      })
       .then((data: Room) => {
         if (rooms) {
           setRooms([...rooms, data]);
         } else {
           setRooms([data]);
         }
+
         setName('');
+        setDescription('');
       });
   };
 
