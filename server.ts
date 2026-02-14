@@ -23,7 +23,7 @@ const io = new Server(httpServer, {
   serveClient: false,
 });
 
-var allowCrossDomain = function (
+const allowCrossDomain = function (
   req: Request,
   res: Response,
   next: NextFunction,
