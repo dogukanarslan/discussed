@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MessageForm } from '../MessageForm/MessageForm';
 import { MessageList, type TMsg } from '../MessageList/MessageList';
+import { apiFetch } from '../../../api';
 
 import { socket } from '../../../socket';
 
@@ -22,7 +23,7 @@ export const MessageWrapper = (props: Props) => {
     }
 
     setLoading(true);
-    fetch(`/api/messages/${selectedRoomId}`)
+    apiFetch(`/api/messages/${selectedRoomId}`)
       .then((res) => res.json())
       .then((data) => {
         setMsgs(data);

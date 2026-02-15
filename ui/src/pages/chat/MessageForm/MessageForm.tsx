@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { apiFetch } from '../../../api';
 
 interface Props {
   roomId: number;
@@ -18,7 +19,7 @@ export const MessageForm = (props: Props) => {
       return;
     }
 
-    fetch(`/api/messages`, {
+    apiFetch(`/api/messages`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { Rooms } from './Rooms/Rooms';
 import { MessageWrapper } from './MessageWrapper/MessageWrapper';
+import { apiFetch } from '../../api';
 
 interface Props {
   user: { username: string };
@@ -18,8 +18,13 @@ export const Chat = (props: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`/api/rooms`)
-      .then((res) => res.json())
+    apiFetch(`/api/rooms`)
+      .then((res) => {
+        if (!res.ok) {
+          throw Error('Error');
+        }
+        return res.json();
+      })
       .then((data) => {
         setRooms(data);
       });
@@ -47,11 +52,20 @@ export const Chat = (props: Props) => {
 
   return (
     <div className="flex flex-col gap-4 h-full">
-      <Rooms
-        rooms={rooms}
-        selectedRoomId={selectedRoomId}
-        changeRoom={(roomId) => setSelectedRoomId(roomId)}
-      />
+      <select
+        value={selectedRoomId || ''}
+        onChange={(e) => setSelectedRoomId(Number(e.target.value))}
+      >
+        <option value="" hidden disabled>
+          Select a room
+        </option>
+        {rooms.map((room) => (
+          <option value={room.id} key={room.id}>
+            {room.name}
+          </option>
+        ))}
+      </select>
+
       {selectedRoomId && (
         <MessageWrapper user={user} selectedRoomId={selectedRoomId} />
       )}

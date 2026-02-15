@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RoomListItem } from './RoomListItem';
+import { apiFetch } from '../../api';
 
 type Room = {
   id: number;
@@ -22,7 +23,7 @@ export const Rooms = () => {
       return;
     }
 
-    fetch(`/api/rooms`, {
+    apiFetch(`/api/rooms`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ export const Rooms = () => {
   };
 
   const deleteRoom = (roomId: number) => {
-    fetch(`/api/rooms/${roomId}`, {
+    apiFetch(`/api/rooms/${roomId}`, {
       method: 'DELETE',
     }).then((res) => {
       if (res.ok) {
@@ -65,7 +66,7 @@ export const Rooms = () => {
   };
 
   useEffect(() => {
-    fetch(`/api/rooms`)
+    apiFetch(`/api/rooms`)
       .then((res) => res.json())
       .then((data: Room[]) => {
         setRooms(data);

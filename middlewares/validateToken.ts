@@ -3,20 +3,24 @@ import jwt from 'jsonwebtoken';
 
 export const validateToken = (
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction,
 ) => {
-  const cookies = req.headers.cookie;
-  const token = cookies?.split('=')[1];
+  const cookies = req.headers.cookie ?? '';
+  const token = cookies
+    .split(';')
+    .map((cookie) => cookie.trim())
+    .find((cookie) => cookie.startsWith('jwt='))
+    ?.slice('jwt='.length);
 
   if (!token) {
-    throw Error('Token not found');
+    return next({ status: 401, message: 'Token not found' });
   }
 
   try {
     jwt.verify(token, process.env.JWT_SECRET!);
-    next();
+    return next();
   } catch (e) {
-    throw Error('Invalid token');
+    return next({ status: 401, message: 'Invalid token' });
   }
 };
