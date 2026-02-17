@@ -10,6 +10,10 @@ interface Props {
   selectedRoomId?: number;
 }
 
+type TSocketMsg = TMsg & {
+  room_id?: number;
+};
+
 export const MessageWrapper = (props: Props) => {
   const { user, selectedRoomId } = props;
 
@@ -37,14 +41,24 @@ export const MessageWrapper = (props: Props) => {
   }, [selectedRoomId]);
 
   useEffect(() => {
-    socket.on('message', (data: TMsg) => {
+    if (!selectedRoomId) {
+      return;
+    }
+
+    const handleMessage = (data: TSocketMsg) => {
+      if (data.room_id !== undefined && data.room_id !== selectedRoomId) {
+        return;
+      }
+
       setMsgs((prev) => [...prev, data]);
-    });
+    };
+
+    socket.on('message', handleMessage);
 
     return () => {
-      socket.off('message');
+      socket.off('message', handleMessage);
     };
-  }, []);
+  }, [selectedRoomId]);
 
   if (!selectedRoomId) {
     return;

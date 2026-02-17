@@ -8,6 +8,7 @@ export type TMsg = {
   message: string;
   created_at: string;
   new_user: string;
+  room_id: number;
 };
 
 interface Props {
