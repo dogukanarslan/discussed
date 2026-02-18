@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 import { render } from 'vitest-browser-react';
-import { Message } from '../Message';
+import { Message } from '../pages/chat/Message/Message';
 
 test('renders message data', async () => {
   const msg = {
