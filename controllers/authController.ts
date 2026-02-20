@@ -10,7 +10,7 @@ export const signin = (req: Request, res: Response, next: NextFunction) => {
     if (!user) {
       return next({ status: 404, message: 'User not found' });
     }
-    res.cookie('jwt', user.token);
+    res.cookie('jwt', user.token, { httpOnly: true });
     return res.status(200).json({ username: user.username, id: user.id });
   } catch (e) {
     next(e);
@@ -34,7 +34,7 @@ export const signup = (
     if (!user) {
       return next({ status: 400, message: 'Error creating user' });
     }
-    res.cookie('jwt', user.token);
+    res.cookie('jwt', user.token, { httpOnly: true });
     res.status(201).json({ username: user.username, id: user.id });
   } catch (e) {
     if (e instanceof Error && 'errcode' in e && e.errcode === 2067) {
