@@ -12,7 +12,7 @@ export const MessageModel = {
     try {
       return database
         .prepare(
-          'SELECT m.id, m.message, m.created_at, u.username FROM messages m JOIN users u ON m.user_id = u.id WHERE m.id = ?',
+          'SELECT m.id, m.message, m.created_at, m.room_id, u.username FROM messages m JOIN users u ON m.user_id = u.id WHERE m.id = ?',
         )
         .get(msgId) as Message | undefined;
     } catch (e) {
