@@ -7,7 +7,6 @@ export type TMsg = {
   username: string;
   message: string;
   created_at: string;
-  new_user: string;
   room_id: number;
 };
 
