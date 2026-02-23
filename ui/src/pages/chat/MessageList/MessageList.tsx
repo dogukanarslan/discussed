@@ -32,7 +32,7 @@ export const MessageList = (props: Props) => {
 
       ref.current.scrollIntoView({ block: 'end' });
     });
-  }, [msgs]);
+  }, [msgs.length]);
 
   return (
     <div className="h-full w-full overflow-y-auto flex-1">
