@@ -40,7 +40,7 @@ export const MessageList = (props: Props) => {
         <p>No messages</p>
       ) : (
         msgs.map((msg) => (
-          <Message key={msg.id} message={msg} username={user?.username} />
+          <Message key={msg.id} message={msg} username={user.username} />
         ))
       )}
       {msgs.length > 0 && <div ref={ref} />}
