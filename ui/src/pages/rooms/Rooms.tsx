@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+
 import { RoomListItem } from './RoomListItem';
 import { apiFetch } from '../../api';
+import { CreateRoomForm } from './CreateRoomForm';
 
 type Room = {
   id: number;
@@ -11,12 +13,7 @@ type Room = {
 export const Rooms = () => {
   const [rooms, setRooms] = useState<Room[]>();
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = (name: string, description?: string) => {
     const user = JSON.parse(sessionStorage.getItem('user') || '""');
 
     if (!user) {
@@ -47,9 +44,6 @@ export const Rooms = () => {
         } else {
           setRooms([data]);
         }
-
-        setName('');
-        setDescription('');
       });
   };
 
@@ -76,22 +70,7 @@ export const Rooms = () => {
   return (
     <div className="flex flex-col gap-3">
       <h3 className="text-xl font-semibold">Rooms</h3>
-      <form className="grid gap-2" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-        />
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
-        />
-
-        <button className="w-full">Create New Room</button>
-      </form>
+      <CreateRoomForm onCreate={handleSubmit} />
 
       {rooms && rooms.length > 0 ? (
         <div className="flex flex-col gap-3">
