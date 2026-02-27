@@ -68,12 +68,12 @@ export const Rooms = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 h-full">
       <h3 className="text-xl font-semibold">Rooms</h3>
       <CreateRoomForm onCreate={handleSubmit} />
 
       {rooms && rooms.length > 0 ? (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 overflow-y-auto h-full">
           {rooms.map((room) => (
             <RoomListItem key={room.id} room={room} onDelete={deleteRoom} />
           ))}
