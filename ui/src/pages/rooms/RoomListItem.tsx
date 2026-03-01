@@ -25,12 +25,7 @@ export const RoomListItem = (props: Props) => {
         </div>
       </div>
 
-      <button
-        className="rounded-md border border-rose-200 bg-rose-50 px-3 py-1.5 text-sm font-medium text-rose-700 transition-colors hover:bg-rose-100 active:bg-rose-200"
-        onClick={() => onDelete(room.id)}
-      >
-        Delete
-      </button>
+      <button onClick={() => onDelete(room.id)}>Delete</button>
     </div>
   );
 };
