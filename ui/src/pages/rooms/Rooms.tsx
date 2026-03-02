@@ -28,7 +28,7 @@ export const Rooms = () => {
       body: JSON.stringify({
         name,
         description,
-        user_id: 1,
+        user_id: user.id,
       }),
     })
       .then((res) => {
