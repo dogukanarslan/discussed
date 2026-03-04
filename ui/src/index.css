@@ -3,7 +3,6 @@
 
 @theme {
   --color-primary: silver;
-  --radius-app: 10px;
   --spacing-header: 60px;
   --spacing-messageForm: 60px;
   --font-sans: "Quicksand", sans-serif;
@@ -49,7 +48,7 @@ ul {
 }
 
 button {
-  @apply inline-flex items-center justify-center px-3 py-2 rounded-app border-2 border-transparent bg-primary text-slate-900 cursor-pointer transition hover:brightness-95;
+  @apply inline-flex items-center justify-center px-3 py-2 rounded-lg border-2 border-transparent bg-primary text-slate-900 cursor-pointer transition hover:brightness-95;
 }
 
 button + button {
