@@ -61,7 +61,7 @@ export const MessageWrapper = (props: Props) => {
   }, [selectedRoomId]);
 
   if (!selectedRoomId) {
-    return;
+    return null;
   }
 
   if (loading) {
