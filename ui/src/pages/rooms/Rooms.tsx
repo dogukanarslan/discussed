@@ -69,7 +69,7 @@ export const Rooms = () => {
 
   return (
     <div className="flex flex-col gap-3 h-full">
-      <h3 className="text-xl font-semibold">Rooms</h3>
+      <h3 className="text-lg font-semibold">Rooms</h3>
       <CreateRoomForm onCreate={handleSubmit} />
 
       {rooms && rooms.length > 0 ? (

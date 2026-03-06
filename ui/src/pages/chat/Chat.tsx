@@ -52,6 +52,7 @@ export const Chat = (props: Props) => {
 
   return (
     <div className="flex flex-col gap-4 h-full">
+      <h3 className="text-lg font-semibold">Chat</h3>
       <select
         value={selectedRoomId || ''}
         onChange={(e) => setSelectedRoomId(Number(e.target.value))}
