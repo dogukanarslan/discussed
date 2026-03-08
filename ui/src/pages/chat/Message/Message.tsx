@@ -19,7 +19,7 @@ export const Message = (props: Props) => {
       <div>
         <b>{isCurrentUser ? 'You' : message.username}</b>: {message.message}
       </div>
-      <div className="bg-primary rounded-app px-2 py-1 text-sm">
+      <div className="bg-primary rounded px-2 py-1 text-sm">
         {formatTime(message.created_at)}
       </div>
     </div>
