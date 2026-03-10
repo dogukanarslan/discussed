@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiFetch } from '../../../api';
+import { apiFetch } from '@/api';
 
 interface Props {
   roomId: number;

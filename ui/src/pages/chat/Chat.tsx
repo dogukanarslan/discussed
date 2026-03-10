@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { MessageWrapper } from './MessageWrapper/MessageWrapper';
-import { apiFetch } from '../../api';
+import { MessageWrapper } from '@/pages/chat/MessageWrapper/MessageWrapper';
+import { apiFetch } from '@/api';
 
 interface Props {
   user: { username: string };

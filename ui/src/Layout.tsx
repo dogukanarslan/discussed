@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router';
-import { Header } from './components/Header';
+import { Header } from '@/components/Header';
 
 interface Props {
   user: { username: string } | null;

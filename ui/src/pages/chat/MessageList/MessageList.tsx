@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { Message } from '../Message/Message';
+import { Message } from '@/pages/chat/Message/Message';
 
 export type TMsg = {
   id: number;

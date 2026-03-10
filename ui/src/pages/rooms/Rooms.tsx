@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { RoomListItem } from './RoomListItem';
-import { apiFetch } from '../../api';
-import { CreateRoomForm } from './CreateRoomForm';
+import { RoomListItem } from '@/pages/rooms/RoomListItem';
+import { apiFetch } from '@/api';
+import { CreateRoomForm } from '@/pages/rooms/CreateRoomForm';
 
 type Room = {
   id: number;

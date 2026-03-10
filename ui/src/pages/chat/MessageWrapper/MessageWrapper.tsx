@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { MessageForm } from '../MessageForm/MessageForm';
-import { MessageList, type TMsg } from '../MessageList/MessageList';
-import { apiFetch } from '../../../api';
+import { MessageForm } from '@/pages/chat/MessageForm/MessageForm';
+import { MessageList, type TMsg } from '@/pages/chat/MessageList/MessageList';
+import { apiFetch } from '@/api';
 
-import { socket } from '../../../socket';
+import { socket } from '@/socket';
 
 interface Props {
   user: { username: string };

@@ -1,4 +1,4 @@
-import { formatTime } from '../../../constants';
+import { formatTime } from '@/constants';
 
 interface Props {
   message: {

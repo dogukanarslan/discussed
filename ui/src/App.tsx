@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { createHashRouter, RouterProvider } from 'react-router';
 
-import { SignUp } from './pages/sign-up/SignUp';
-import { SignIn } from './pages/sign-in/SignIn';
-import { Chat } from './pages/chat/Chat';
-import { Rooms } from './pages/rooms/Rooms';
+import { SignUp } from '@/pages/sign-up/SignUp';
+import { SignIn } from '@/pages/sign-in/SignIn';
+import { Chat } from '@/pages/chat/Chat';
+import { Rooms } from '@/pages/rooms/Rooms';
 
-import { Layout } from './Layout';
+import { Layout } from '@/Layout';
 
 function App() {
   const storageUser = sessionStorage.getItem('user');
