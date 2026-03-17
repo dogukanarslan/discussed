@@ -12,6 +12,7 @@ type Room = {
 
 export const Rooms = () => {
   const [rooms, setRooms] = useState<Room[]>();
+  const [search, setSearch] = useState('');
 
   const handleSubmit = (name: string, description?: string) => {
     const user = JSON.parse(sessionStorage.getItem('user') || '""');
@@ -72,11 +73,22 @@ export const Rooms = () => {
       <h3 className="text-lg font-semibold">Rooms</h3>
       <CreateRoomForm onCreate={handleSubmit} />
 
+      <input
+        type="text"
+        placeholder="Search room"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
       {rooms && rooms.length > 0 ? (
         <div className="flex flex-col gap-3 overflow-y-auto h-full">
-          {rooms.map((room) => (
-            <RoomListItem key={room.id} room={room} onDelete={deleteRoom} />
-          ))}
+          {rooms
+            .filter((room) =>
+              room.name.toLowerCase().includes(search.toLowerCase()),
+            )
+            .map((room) => (
+              <RoomListItem key={room.id} room={room} onDelete={deleteRoom} />
+            ))}
         </div>
       ) : (
         'No rooms created'
