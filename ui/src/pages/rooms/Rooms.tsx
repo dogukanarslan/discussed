@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { RoomListItem } from '@/pages/rooms/RoomListItem';
 import { apiFetch } from '@/api';
 import { CreateRoomForm } from '@/pages/rooms/CreateRoomForm';
+import { useSearchParams } from 'react-router';
 
 type Room = {
   id: number;
@@ -11,8 +12,10 @@ type Room = {
 };
 
 export const Rooms = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [rooms, setRooms] = useState<Room[]>();
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(searchParams.get('roomName') || '');
 
   const handleSubmit = (name: string, description?: string) => {
     const user = JSON.parse(sessionStorage.getItem('user') || '""');
@@ -68,23 +71,33 @@ export const Rooms = () => {
       });
   }, []);
 
+  const handleSearch: React.SubmitEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    setSearchParams({ roomName: search });
+  };
+
   return (
     <div className="flex flex-col gap-3 h-full">
       <h3 className="text-lg font-semibold">Rooms</h3>
       <CreateRoomForm onCreate={handleSubmit} />
 
-      <input
-        type="text"
-        placeholder="Search room"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <form onSubmit={handleSearch} className="flex items-center gap-2">
+        <input
+          type="text"
+          placeholder="Search room"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button>Search</button>
+      </form>
 
       {rooms && rooms.length > 0 ? (
         <div className="flex flex-col gap-3 overflow-y-auto h-full">
           {rooms
             .filter((room) =>
-              room.name.toLowerCase().includes(search.toLowerCase()),
+              room.name
+                .toLowerCase()
+                .includes((searchParams.get('roomName') || '').toLowerCase()),
             )
             .map((room) => (
               <RoomListItem key={room.id} room={room} onDelete={deleteRoom} />
