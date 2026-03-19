@@ -5,6 +5,7 @@ import { SignUp } from '@/pages/sign-up/SignUp';
 import { SignIn } from '@/pages/sign-in/SignIn';
 import { Chat } from '@/pages/chat/Chat';
 import { Rooms } from '@/pages/rooms/Rooms';
+import { CreateRoom } from '@/pages/create-room/CreateRoom';
 
 import { Layout } from '@/Layout';
 
@@ -21,6 +22,7 @@ function App() {
       children: [
         { path: '/', element: <Chat user={user!} /> },
         { path: '/rooms', element: <Rooms /> },
+        { path: '/rooms/create', element: <CreateRoom /> },
       ],
     },
     { path: '/signin', element: <SignIn setUser={setUser} /> },
