@@ -48,7 +48,7 @@ ul {
 }
 
 button {
-  @apply inline-flex items-center justify-center px-3 py-2 rounded-lg border-2 border-transparent bg-primary text-slate-900 cursor-pointer transition hover:brightness-95;
+  @apply inline-flex items-center justify-center px-3 py-2 rounded-lg bg-primary text-slate-900 cursor-pointer transition font-medium shadow-sm text-sm border-slate-200;
 }
 
 button + button {
