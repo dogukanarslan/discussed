@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router';
 
 import { RoomListItem } from '@/pages/rooms/RoomListItem';
 import { apiFetch } from '@/api';
-import { CreateRoomForm } from '@/pages/rooms/CreateRoomForm';
-import { useSearchParams } from 'react-router';
 
 type Room = {
   id: number;
@@ -15,41 +14,7 @@ export const Rooms = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [rooms, setRooms] = useState<Room[]>();
-  const [search, setSearch] = useState(searchParams.get('roomName') || '');
-
-  const handleSubmit = (name: string, description?: string) => {
-    const user = JSON.parse(sessionStorage.getItem('user') || '""');
-
-    if (!user) {
-      return;
-    }
-
-    apiFetch(`/api/rooms`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        description,
-        user_id: user.id,
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error('Error');
-        }
-
-        return res.json();
-      })
-      .then((data: Room) => {
-        if (rooms) {
-          setRooms([...rooms, data]);
-        } else {
-          setRooms([data]);
-        }
-      });
-  };
+  const [search, setSearch] = useState(searchParams.get('name') || '');
 
   const deleteRoom = (roomId: number) => {
     apiFetch(`/api/rooms/${roomId}`, {
@@ -73,38 +38,57 @@ export const Rooms = () => {
 
   const handleSearch: React.SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    setSearchParams({ roomName: search });
+    setSearchParams({ name: search });
   };
 
-  return (
-    <div className="flex flex-col gap-3 h-full">
-      <h3 className="text-lg font-semibold">Rooms</h3>
-      <CreateRoomForm onCreate={handleSubmit} />
+  const filteredRooms =
+    rooms?.filter((room) =>
+      room.name
+        .toLowerCase()
+        .includes((searchParams.get('name') || '').toLowerCase()),
+    ) || [];
 
-      <form onSubmit={handleSearch} className="flex items-center gap-2">
+  return (
+    <div className="flex flex-col gap-4 h-full">
+      <div className="flex justify-between items-center rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-sm">
+        <div>
+          <h3 className="text-lg font-semibold text-slate-900">Rooms</h3>
+          <p className="text-sm text-slate-500">
+            Browse, search, and manage your rooms.
+          </p>
+        </div>
+        <Link
+          to="/rooms/create"
+          className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1.5 text-sm font-medium shadow-sm"
+        >
+          Create New Room
+        </Link>
+      </div>
+
+      <form
+        onSubmit={handleSearch}
+        className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 shadow-sm"
+      >
         <input
           type="text"
           placeholder="Search room"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          className="flex-1 bg-transparent text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
         />
-        <button>Search</button>
+        <button className="rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-emerald-500">
+          Search
+        </button>
       </form>
 
-      {rooms && rooms.length > 0 ? (
-        <div className="flex flex-col gap-3 overflow-y-auto h-full">
-          {rooms
-            .filter((room) =>
-              room.name
-                .toLowerCase()
-                .includes((searchParams.get('roomName') || '').toLowerCase()),
-            )
-            .map((room) => (
-              <RoomListItem key={room.id} room={room} onDelete={deleteRoom} />
-            ))}
+      {filteredRooms && filteredRooms.length > 0 ? (
+        <div className="flex flex-col gap-3 overflow-y-auto rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+          {filteredRooms.map((room) => (
+            <RoomListItem key={room.id} room={room} onDelete={deleteRoom} />
+          ))}
         </div>
       ) : (
-        'No rooms created'
+        'No rooms'
       )}
     </div>
   );
