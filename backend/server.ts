@@ -23,11 +23,11 @@ const io = new Server(httpServer, {
   serveClient: false,
 });
 
-const allowCrossDomain = function (
+const allowCrossDomain = (
   req: Request,
   res: Response,
   next: NextFunction,
-) {
+) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.header('Access-Control-Allow-Methods', '*');
@@ -36,7 +36,7 @@ const allowCrossDomain = function (
 
 // Middlewares
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/foo', express.static(path.join(__dirname, 'ui', 'dist')));
+app.use('/foo', express.static(path.join(__dirname, '..', 'ui', 'dist')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(allowCrossDomain);

@@ -25,33 +25,47 @@ Clone the repository:
 
 `cd discussed`
 
-Install dependencies:
+Install backend dependencies:
 
-`npm install`
+`cd backend && npm install`
 
-Create an environment file:
+Install frontend dependencies:
 
-`cp .env.example .env`
+`cd ui && npm install`
 
-Fill in the required values such as server port, database connection string, and authentication secrets.
+Create the backend environment file:
+
+`cp backend/.env.example backend/.env`
+
+Create the frontend environment file:
+
+`cp ui/.env.example ui/.env`
+
+Fill in the required values such as server port, database connection string, authentication secrets, and frontend API URL.
 
 ## Running the Project
 
-Development mode:
+Frontend development mode:
 
-`npm run dev`
+`cd ui && npm run dev`
 
-Production build:
+Backend development mode:
 
-`npm run build`
+`cd backend && npm run dev`
 
-`npm start`
+Frontend production build:
+
+`cd ui && npm run build`
+
+Backend production start:
+
+`cd backend && npm run start`
 
 ## Testing
 
-Run tests using:
+Run frontend tests using:
 
-`npm test`
+`cd ui && npm run test`
 
 Tests are configured with Vitest and can be extended to cover services, controllers, and integrations.
 
@@ -60,7 +74,8 @@ Tests are configured with Vitest and can be extended to cover services, controll
 Common environment variables include:
 
 - PORT: Server port
-- DB_URI: Database connection string
+- DB: SQLite database path
 - JWT_SECRET: Authentication secret
+- VITE_BASE_URL: Frontend API base URL
 
-Refer to `.env.example` for the full list.
+Refer to `backend/.env.example` and `ui/.env.example` for the full list.
