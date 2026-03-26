@@ -40,11 +40,9 @@ export const Chat = (props: Props) => {
     }
   }, [user, location, navigate]);
 
-  useEffect(() => {
-    if (!selectedRoomId && rooms.length > 0 && rooms[0].id) {
-      setSelectedRoomId(rooms[0].id);
-    }
-  }, [rooms, selectedRoomId, setSelectedRoomId]);
+  const activeRoomId = rooms.some((room) => room.id === selectedRoomId)
+    ? selectedRoomId
+    : rooms[0]?.id;
 
   if (!user) {
     return;
@@ -54,7 +52,7 @@ export const Chat = (props: Props) => {
     <div className="flex flex-col gap-4 h-full">
       <h3 className="text-lg font-semibold">Chat</h3>
       <select
-        value={selectedRoomId || ''}
+        value={activeRoomId || ''}
         onChange={(e) => setSelectedRoomId(Number(e.target.value))}
       >
         <option value="" hidden disabled>
@@ -67,8 +65,8 @@ export const Chat = (props: Props) => {
         ))}
       </select>
 
-      {selectedRoomId && (
-        <MessageWrapper user={user} selectedRoomId={selectedRoomId} />
+      {activeRoomId && (
+        <MessageWrapper user={user} selectedRoomId={activeRoomId} />
       )}
     </div>
   );
