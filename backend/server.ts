@@ -7,7 +7,7 @@ import { Server } from 'socket.io';
 
 import { router as MessageRoute } from './routes/messagesRoute.ts';
 import { router as AuthRoute } from './routes/authRoute.ts';
-import { router as RoomRoute } from './routes/roomRoute.ts';
+import { router as SubjectRoute } from './routes/subjectRoute.ts';
 import { errorHandler } from './middlewares/errorHandler.ts';
 import { validateToken } from './middlewares/validateToken.ts';
 
@@ -23,11 +23,7 @@ const io = new Server(httpServer, {
   serveClient: false,
 });
 
-const allowCrossDomain = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+const allowCrossDomain = (req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.header('Access-Control-Allow-Methods', '*');
@@ -45,7 +41,7 @@ app.set('socketio', io);
 
 // Routes
 app.use('/messages', validateToken, MessageRoute);
-app.use('/rooms', validateToken, RoomRoute);
+app.use('/subjects', validateToken, SubjectRoute);
 app.use('/', AuthRoute);
 
 app.use(errorHandler);

@@ -1,25 +1,27 @@
 import { database } from '../db/db.ts';
 
-interface Room {
+interface Subject {
   id: number;
   name: string;
   user_id: number;
   created_at: string;
 }
 
-export const RoomModel = {
-  getById(roomId: number): Room | undefined {
+export const SubjectModel = {
+  getById(subjectId: number): Subject | undefined {
     try {
       return database
-        .prepare('SELECT * FROM rooms WHERE id = ?')
-        .get(roomId) as unknown as Room | undefined;
+        .prepare('SELECT * FROM subjects WHERE id = ?')
+        .get(subjectId) as unknown as Subject | undefined;
     } catch (e) {
       throw e;
     }
   },
-  getAll(): Room[] {
+  getAll(): Subject[] {
     try {
-      return database.prepare('SELECT * FROM rooms').all() as unknown as Room[];
+      return database
+        .prepare('SELECT * FROM subjects')
+        .all() as unknown as Subject[];
     } catch (e) {
       throw e;
     }
@@ -32,7 +34,7 @@ export const RoomModel = {
     try {
       const result = database
         .prepare(
-          'INSERT INTO rooms (name, description, user_id) VALUES (?, ?, ?)',
+          'INSERT INTO subjects (name, description, user_id) VALUES (?, ?, ?)',
         )
         .run(name, description, user_id);
       return { id: result.lastInsertRowid as number };
@@ -40,10 +42,10 @@ export const RoomModel = {
       throw e;
     }
   },
-  delete(roomId: number): { id: number } {
+  delete(subjectId: number): { id: number } {
     try {
-      database.prepare('DELETE FROM rooms WHERE id = ?').run(roomId);
-      return { id: roomId };
+      database.prepare('DELETE FROM subjects WHERE id = ?').run(subjectId);
+      return { id: subjectId };
     } catch (e) {
       throw e;
     }

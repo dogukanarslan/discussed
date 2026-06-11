@@ -1,11 +1,11 @@
 import type { Request, Response, NextFunction } from 'express';
 
-import { RoomService } from '../services/RoomService.ts';
+import { SubjectService } from '../services/SubjectService.ts';
 
 export const index = (req: Request, res: Response, next: NextFunction) => {
   try {
-    const rooms = RoomService.getAll();
-    res.send(rooms);
+    const subjects = SubjectService.getAll();
+    res.send(subjects);
   } catch (e) {
     next(e);
   }
@@ -18,7 +18,7 @@ export const store = (
 ) => {
   try {
     const { name, description, user_id } = req.body;
-    const room = RoomService.create({
+    const room = SubjectService.create({
       name,
       user_id,
       description: description ?? null,
@@ -30,10 +30,14 @@ export const store = (
   }
 };
 
-export const deleteRoom = (req: Request, res: Response, next: NextFunction) => {
+export const deleteSubject = (
+  req: Request<{ subjectId: string }>,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
-    const { roomId } = req.params;
-    RoomService.delete(parseInt(roomId));
+    const { subjectId } = req.params;
+    SubjectService.delete(parseInt(subjectId));
     res.sendStatus(204);
   } catch (e) {
     next(e);
