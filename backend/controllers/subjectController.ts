@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 
-import { SubjectService } from '../services/SubjectService.ts';
+import { SubjectService } from '../services/SubjectService.js';
 
 export const index = (req: Request, res: Response, next: NextFunction) => {
   try {

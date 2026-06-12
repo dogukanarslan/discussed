@@ -1,4 +1,4 @@
-import { SubjectModel } from '../models/subjectModel.ts';
+import { SubjectModel } from '../models/subjectModel.js';
 
 export const SubjectService = {
   getById(subjectId: number) {

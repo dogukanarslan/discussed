@@ -3,7 +3,7 @@ import {
   store,
   index,
   deleteSubject,
-} from '../controllers/subjectController.ts';
+} from '../controllers/subjectController.js';
 
 export const router = express.Router();
 

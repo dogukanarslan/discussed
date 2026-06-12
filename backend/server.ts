@@ -5,11 +5,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Server } from 'socket.io';
 
-import { router as MessageRoute } from './routes/messagesRoute.ts';
-import { router as AuthRoute } from './routes/authRoute.ts';
-import { router as SubjectRoute } from './routes/subjectRoute.ts';
-import { errorHandler } from './middlewares/errorHandler.ts';
-import { validateToken } from './middlewares/validateToken.ts';
+import { router as MessageRoute } from './routes/messagesRoute.js';
+import { router as AuthRoute } from './routes/authRoute.js';
+import { router as SubjectRoute } from './routes/subjectRoute.js';
+import { errorHandler } from './middlewares/errorHandler.js';
+import { validateToken } from './middlewares/validateToken.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

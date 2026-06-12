@@ -1,4 +1,4 @@
-import { database } from '../db/db.ts';
+import { database } from '../db/db.js';
 
 interface Message {
   id: number;

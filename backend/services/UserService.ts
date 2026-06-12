@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { UserModel } from '../models/userModel.ts';
+import { UserModel } from '../models/userModel.js';
 
 export const UserService = {
   signin(username: string, password: string) {

@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --watch --env-file=.env server.ts",
-    "start": "node --env-file=.env server.ts"
+    "dev": "tsx watch --env-file=.env server.ts",
+    "build": "tsc server --outDir dist",
+    "start": "node --env-file=.env dist/server.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -17,6 +18,8 @@
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^24.10.0"
+    "@types/node": "^24.10.0",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
   }
 }

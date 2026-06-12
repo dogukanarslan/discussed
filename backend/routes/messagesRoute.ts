@@ -1,5 +1,5 @@
 import express from 'express';
-import { store, index, getBySubjectId } from '../controllers/messageController.ts';
+import { store, index, getBySubjectId } from '../controllers/messageController.js';
 
 export const router = express.Router();
 
