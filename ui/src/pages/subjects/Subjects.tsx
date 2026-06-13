@@ -1,21 +1,16 @@
-import { useEffect, useState } from 'react';
-import type { SubjectData } from '@/types/api';
-import { apiGet } from '@/api';
 import { SubjectList } from './SubjectList';
+import { useSubjects } from '@/hooks/useSubjects';
 
 export const Subjects = () => {
-  const [subjects, setSubjects] = useState<SubjectData[]>([]);
+  const { data: subjects = [], loading, error } = useSubjects();
 
-  useEffect(() => {
-    (async () => {
-      const data = await apiGet<SubjectData[]>('/api/subjects');
-      setSubjects(data);
-    })();
-  }, []);
+  if (loading) {
+    return 'Loading...';
+  }
 
-  return (
-    <div>
-      <SubjectList subjects={subjects} />
-    </div>
-  );
+  if (error) {
+    return error;
+  }
+
+  return <SubjectList subjects={subjects} />;
 };

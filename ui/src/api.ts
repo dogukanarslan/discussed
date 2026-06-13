@@ -26,8 +26,8 @@ async function parseError(res: Response): Promise<string> {
   }
 }
 
-export async function apiGet<T>(url: string): Promise<T> {
-  const res = await apiFetch(url);
+export async function apiGet<T>(url: string, init?: RequestInit): Promise<T> {
+  const res = await apiFetch(url, init);
   if (!res.ok) {
     throw new Error(await parseError(res));
   }
