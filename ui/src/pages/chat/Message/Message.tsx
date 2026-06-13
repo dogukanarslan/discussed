@@ -1,11 +1,8 @@
 import { formatTime } from '@/constants';
+import type { MessageModel } from '@/pages/subject-detail/SubjectDetail';
 
 interface Props {
-  message: {
-    username: string;
-    message: string;
-    created_at: string;
-  };
+  message: MessageModel
   username: string;
 }
 

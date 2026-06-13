@@ -11,6 +11,20 @@ export const index = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+export const show = (
+  req: Request<{ subjectId: number }>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { subjectId } = req.params;
+    const subject = SubjectService.getById(subjectId);
+    res.send(subject);
+  } catch (e) {
+    next(e);
+  }
+};
+
 export const store = (
   req: Request<{}, {}, { name: string; description?: string; user_id: number }>,
   res: Response,

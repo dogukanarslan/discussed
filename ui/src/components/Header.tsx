@@ -1,8 +1,9 @@
+import type { UserModel } from '@/App';
 import { Link } from 'react-router';
 
 interface Props {
-  user: { username: string };
-  setUser: (user: { username: string } | null) => void;
+  user: UserModel;
+  setUser: (user: UserModel | null) => void;
 }
 
 export const Header = (props: Props) => {
@@ -17,13 +18,15 @@ export const Header = (props: Props) => {
     <header className="h-header border-b border-gray-200">
       <div className="max-w-5xl mx-auto flex items-center justify-between h-full px-2">
         <div className="flex items-center gap-5">
-          <h3 className="text-lg font-semibold">Discussed</h3>
+          <Link to="/">
+            <div className="text-lg font-semibold">Discussed</div>
+          </Link>
           <nav className="flex gap-3 text-sm">
-            <Link to="/" className="hover:underline">
-              Chat
+            <Link to="/subjects" className="hover:underline">
+              Subjects
             </Link>
-            <Link to="/rooms" className="hover:underline">
-              Rooms
+            <Link to="/subjects/create" className="hover:underline">
+              Create Subject
             </Link>
           </nav>
         </div>

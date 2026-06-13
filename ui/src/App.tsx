@@ -3,26 +3,33 @@ import { createHashRouter, RouterProvider } from 'react-router';
 
 import { SignUp } from '@/pages/sign-up/SignUp';
 import { SignIn } from '@/pages/sign-in/SignIn';
-import { Chat } from '@/pages/chat/Chat';
-import { Rooms } from '@/pages/rooms/Rooms';
-import { CreateRoom } from '@/pages/create-room/CreateRoom';
 
 import { Layout } from '@/Layout';
+import { Subjects } from '@/pages/subjects/Subjects';
+import { CreateSubject } from '@/pages/create-subject/CreateSubject';
+import { SubjectDetail } from './pages/subject-detail/SubjectDetail';
+import { Dashboard } from './pages/chat/Dashboard';
+
+export type UserModel = { id: number; username: string };
 
 function App() {
   const storageUser = sessionStorage.getItem('user');
 
-  const [user, setUser] = useState(
-    storageUser ? (JSON.parse(storageUser) as { username: string }) : null,
+  const [user, setUser] = useState<UserModel | null>(
+    storageUser ? (JSON.parse(storageUser) as UserModel) : null,
   );
 
   const router = createHashRouter([
     {
       element: <Layout setUser={setUser} user={user} />,
       children: [
-        { path: '/', element: <Chat user={user!} /> },
-        { path: '/rooms', element: <Rooms /> },
-        { path: '/rooms/create', element: <CreateRoom /> },
+        { path: '/', element: <Dashboard /> },
+        { path: '/subjects', element: <Subjects /> },
+        {
+          path: '/subjects/:subjectId',
+          element: <SubjectDetail user={user!} />,
+        },
+        { path: '/subjects/create', element: <CreateSubject user={user!} /> },
       ],
     },
     { path: '/signin', element: <SignIn setUser={setUser} /> },

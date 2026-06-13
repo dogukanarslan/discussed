@@ -1,8 +1,9 @@
+import type { UserModel } from '@/App';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 interface Props {
-  setUser: (user: { username: string }) => void;
+  setUser: (user: UserModel | null) => void;
 }
 
 export const SignUp = (props: Props) => {
@@ -33,7 +34,7 @@ export const SignUp = (props: Props) => {
       })
       .then((data) => {
         sessionStorage.setItem('user', JSON.stringify(data));
-        setUser({ username: data.username });
+        setUser({ id: data.id, username: data.username });
         navigate('/');
       })
       .catch((e) => {

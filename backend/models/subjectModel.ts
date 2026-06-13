@@ -1,18 +1,33 @@
 import { database } from '../db/db.js';
+import { MessageModel } from './messageModel.js';
+
+interface Message {
+  id: number;
+  message: string;
+  created_at: string;
+  username: string;
+}
 
 interface Subject {
   id: number;
   name: string;
   user_id: number;
   created_at: string;
+  messages: Message[];
 }
 
 export const SubjectModel = {
   getById(subjectId: number): Subject | undefined {
     try {
-      return database
+      const subject = database
         .prepare('SELECT * FROM subjects WHERE id = ?')
-        .get(subjectId) as unknown as Subject | undefined;
+        .get(subjectId) as Omit<Subject, 'messages'> | undefined;
+
+      if (!subject) return undefined;
+
+      const messages = MessageModel.getBySubjectId(subjectId);
+
+      return { ...subject, messages };
     } catch (e) {
       throw e;
     }

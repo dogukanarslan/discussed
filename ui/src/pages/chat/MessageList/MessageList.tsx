@@ -1,18 +1,12 @@
 import { useEffect, useRef } from 'react';
 
 import { Message } from '@/pages/chat/Message/Message';
-
-export type TMsg = {
-  id: number;
-  username: string;
-  message: string;
-  created_at: string;
-  room_id: number;
-};
+import type { UserModel } from '@/App';
+import type { MessageModel } from '@/pages/subject-detail/SubjectDetail';
 
 interface Props {
-  msgs: TMsg[];
-  user: { username: string };
+  msgs: MessageModel[];
+  user: UserModel;
 }
 
 export const MessageList = (props: Props) => {
