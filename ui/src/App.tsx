@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createHashRouter, RouterProvider } from 'react-router';
+import { createHashRouter, RouterProvider, Navigate } from 'react-router';
 import type { UserData } from '@/types/api';
 
 import { SignUp } from '@/pages/sign-up/SignUp';
@@ -9,7 +9,6 @@ import { Layout } from '@/Layout';
 import { Subjects } from '@/pages/subjects/Subjects';
 import { CreateSubject } from '@/pages/create-subject/CreateSubject';
 import { SubjectDetail } from './pages/subject-detail/SubjectDetail';
-import { Dashboard } from './pages/chat/Dashboard';
 
 function App() {
   const storageUser = sessionStorage.getItem('user');
@@ -22,7 +21,7 @@ function App() {
     {
       element: <Layout setUser={setUser} user={user} />,
       children: [
-        { path: '/', element: <Dashboard /> },
+        { path: '/', element: <Navigate to="/subjects" replace /> },
         { path: '/subjects', element: <Subjects /> },
         {
           path: '/subjects/:subjectId',
