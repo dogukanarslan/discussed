@@ -33,6 +33,7 @@ export const SubjectDetail = (props: Props) => {
         user_id: user.id,
       }),
     });
+
     if (res.ok) {
       setMessage('');
     }

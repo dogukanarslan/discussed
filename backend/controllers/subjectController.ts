@@ -32,13 +32,13 @@ export const store = (
 ) => {
   try {
     const { name, description, user_id } = req.body;
-    const room = SubjectService.create({
+    const subject = SubjectService.create({
       name,
       user_id,
       description: description ?? null,
     });
 
-    res.status(201).json(room);
+    res.status(201).json(subject);
   } catch (e) {
     next(e);
   }

@@ -23,7 +23,9 @@ export const SubjectModel = {
         .prepare('SELECT * FROM subjects WHERE id = ?')
         .get(subjectId) as Omit<Subject, 'messages'> | undefined;
 
-      if (!subject) return undefined;
+      if (!subject) {
+        return undefined;
+      }
 
       const messages = MessageModel.getBySubjectId(subjectId);
 

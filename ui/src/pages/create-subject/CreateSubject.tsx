@@ -1,5 +1,6 @@
 import type { UserModel } from '@/App';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 interface Props {
   user: UserModel;
@@ -11,16 +12,24 @@ export const CreateSubject = (props: Props) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  const onSubmit = (e: React.SubmitEvent) => {
+  const navigate = useNavigate();
+
+  const onSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
 
-    fetch('/api/subjects', {
+    const res = await fetch('/api/subjects', {
       headers: {
         'Content-Type': 'application/json',
       },
       method: 'POST',
       body: JSON.stringify({ name, description, user_id: user.id }),
     });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      navigate(`/subjects/${data.id}`)
+    }
   };
 
   return (
