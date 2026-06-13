@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from 'react-router';
+import type { UserData } from '@/types/api';
 import { Header } from '@/components/Header';
-import type { UserModel } from './App';
 
 interface Props {
-  user: UserModel | null;
-  setUser: (user: UserModel | null) => void;
+  user: UserData | null;
+  setUser: (user: UserData | null) => void;
 }
 
 export const Layout = (props: Props) => {

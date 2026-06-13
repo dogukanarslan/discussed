@@ -1,13 +1,8 @@
+import type { SubjectData } from '@/types/api';
 import { SubjectListItem } from './SubjectListItem';
 
-export type SubjectModel = {
-  id: number;
-  name: string;
-  description: string;
-};
-
 interface Props {
-  subjects: SubjectModel[];
+  subjects: SubjectData[];
 }
 
 export const SubjectList = (props: Props) => {

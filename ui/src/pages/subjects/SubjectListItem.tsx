@@ -1,8 +1,8 @@
+import type { SubjectData } from '@/types/api';
 import { Link } from 'react-router';
-import type { SubjectModel } from './SubjectList';
 
 interface Props {
-  subject: SubjectModel;
+  subject: SubjectData;
   onDelete: (subjectId: number) => void;
 }
 

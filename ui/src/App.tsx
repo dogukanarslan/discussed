@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { createHashRouter, RouterProvider } from 'react-router';
+import type { UserData } from '@/types/api';
 
 import { SignUp } from '@/pages/sign-up/SignUp';
 import { SignIn } from '@/pages/sign-in/SignIn';
@@ -10,13 +11,11 @@ import { CreateSubject } from '@/pages/create-subject/CreateSubject';
 import { SubjectDetail } from './pages/subject-detail/SubjectDetail';
 import { Dashboard } from './pages/chat/Dashboard';
 
-export type UserModel = { id: number; username: string };
-
 function App() {
   const storageUser = sessionStorage.getItem('user');
 
-  const [user, setUser] = useState<UserModel | null>(
-    storageUser ? (JSON.parse(storageUser) as UserModel) : null,
+  const [user, setUser] = useState<UserData | null>(
+    storageUser ? (JSON.parse(storageUser) as UserData) : null,
   );
 
   const router = createHashRouter([

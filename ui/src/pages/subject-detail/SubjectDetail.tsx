@@ -1,48 +1,34 @@
-import type { UserModel } from '@/App';
-import React, { useEffect, useState } from 'react';
+import { apiGet, apiPost } from '@/api';
+import type { UserData, SubjectDetailData } from '@/types/api';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { MessageList } from '../chat/MessageList/MessageList';
 
-export type MessageModel = {
-  id: number;
-  message: string;
-  username: string;
-  created_at: string;
-};
-
 interface Props {
-  user: UserModel;
+  user: UserData;
 }
 
 export const SubjectDetail = (props: Props) => {
   const { user } = props;
 
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState<MessageModel[]>([]);
+  const [messages, setMessages] = useState<SubjectDetailData['messages']>([]);
 
   const { subjectId } = useParams();
 
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
-    const res = await fetch(`/api/messages`, {
-      headers: { 'Content-Type': 'application/json' },
-      method: 'POST',
-      body: JSON.stringify({
-        message,
-        subject_id: subjectId,
-        user_id: user.id,
-      }),
+    await apiPost('/api/messages', {
+      message,
+      subject_id: subjectId,
+      user_id: user.id,
     });
-
-    if (res.ok) {
-      setMessage('');
-    }
+    setMessage('');
   };
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`/api/subjects/${subjectId}`);
-      const data = await res.json();
+      const data = await apiGet<SubjectDetailData>(`/api/subjects/${subjectId}`);
       setMessages(data.messages);
     })();
   }, [subjectId]);

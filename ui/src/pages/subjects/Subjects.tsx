@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { SubjectList, type SubjectModel } from './SubjectList';
+import type { SubjectData } from '@/types/api';
+import { apiGet } from '@/api';
+import { SubjectList } from './SubjectList';
 
 export const Subjects = () => {
-  const [subjects, setSubjects] = useState<SubjectModel[]>([]);
+  const [subjects, setSubjects] = useState<SubjectData[]>([]);
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`/api/subjects`);
-      const data = await res.json();
-
+      const data = await apiGet<SubjectData[]>('/api/subjects');
       setSubjects(data);
     })();
   }, []);

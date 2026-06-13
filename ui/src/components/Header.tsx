@@ -1,9 +1,9 @@
-import type { UserModel } from '@/App';
+import type { UserData } from '@/types/api';
 import { Link } from 'react-router';
 
 interface Props {
-  user: UserModel;
-  setUser: (user: UserModel | null) => void;
+  user: UserData;
+  setUser: (user: UserData | null) => void;
 }
 
 export const Header = (props: Props) => {

@@ -1,8 +1,8 @@
+import type { MessageData } from '@/types/api';
 import { formatTime } from '@/constants';
-import type { MessageModel } from '@/pages/subject-detail/SubjectDetail';
 
 interface Props {
-  message: MessageModel
+  message: MessageData
   username: string;
 }
 

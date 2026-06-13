@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiFetch } from '@/api';
+import { apiPost } from '@/api';
 
 interface Props {
   roomId: number;
@@ -10,7 +10,7 @@ export const MessageForm = (props: Props) => {
 
   const [msg, setMsg] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const user = JSON.parse(sessionStorage.getItem('user') || '""');
@@ -19,19 +19,12 @@ export const MessageForm = (props: Props) => {
       return;
     }
 
-    apiFetch(`/api/messages`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_id: user.id,
-        message: msg,
-        room_id: roomId,
-      }),
-    }).then(() => {
-      setMsg('');
+    await apiPost('/api/messages', {
+      user_id: user.id,
+      message: msg,
+      room_id: roomId,
     });
+    setMsg('');
   };
 
   return (

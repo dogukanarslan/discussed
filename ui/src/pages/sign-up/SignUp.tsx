@@ -1,9 +1,10 @@
-import type { UserModel } from '@/App';
+import { apiPost } from '@/api';
+import type { UserData } from '@/types/api';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 interface Props {
-  setUser: (user: UserModel | null) => void;
+  setUser: (user: UserData | null) => void;
 }
 
 export const SignUp = (props: Props) => {
@@ -15,33 +16,20 @@ export const SignUp = (props: Props) => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    fetch('/api/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    })
-      .then(async (res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        const data = await res.json();
-        throw Error(data.message);
-      })
-      .then((data) => {
-        sessionStorage.setItem('user', JSON.stringify(data));
-        setUser({ id: data.id, username: data.username });
-        navigate('/');
-      })
-      .catch((e) => {
-        setError(e.message);
-        setUsername('');
-        setPassword('');
-      });
+    try {
+      const user = await apiPost<UserData>('/api/signup', { username, password });
+      sessionStorage.setItem('user', JSON.stringify(user));
+      setUser(user);
+      navigate('/');
+    } catch (e) {
+      setError((e as Error).message);
+      setUsername('');
+      setPassword('');
+    }
   };
 
   return (
