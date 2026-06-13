@@ -5,7 +5,7 @@ import { apiGet } from '@/api';
 
 export const useSubjects = () => {
   const [data, setData] = useState<SubjectData[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -19,18 +19,18 @@ export const useSubjects = () => {
 
         if (!ctrl.signal.aborted) {
           setData(data);
-          setLoading(false);
         }
       } catch (e) {
         if (!ctrl.signal.aborted) {
-          setLoading(false);
           setError(e instanceof Error ? e.message : 'Unknown error');
         }
+      } finally {
+        setIsLoading(false);
       }
     })();
 
     return () => ctrl.abort();
   }, []);
 
-  return { data, loading, error };
+  return { data, isLoading, error };
 };

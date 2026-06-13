@@ -2,9 +2,9 @@ import { SubjectList } from './SubjectList';
 import { useSubjects } from '@/hooks/useSubjects';
 
 export const Subjects = () => {
-  const { data: subjects = [], loading, error } = useSubjects();
+  const { data: subjects = [], isLoading, error } = useSubjects();
 
-  if (loading) {
+  if (isLoading) {
     return 'Loading...';
   }
 
