@@ -37,7 +37,7 @@ export const SubjectDetail = (props: Props) => {
   }
 
   return (
-    <div>
+    <>
       <MessageList msgs={subjectDetail?.messages || []} user={user} />
       <form onSubmit={handleSubmit}>
         <input
@@ -47,6 +47,6 @@ export const SubjectDetail = (props: Props) => {
           onChange={(e) => setMessage(e.target.value)}
         />
       </form>
-    </div>
+    </>
   );
 };
