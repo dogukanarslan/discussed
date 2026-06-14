@@ -8,7 +8,7 @@ interface Props {
 
 export const SubjectListItem = (props: Props) => {
   const {
-    subject: { id, name, description },
+    subject: { id, name, description, created_at },
     onDelete,
   } = props;
 
@@ -18,6 +18,9 @@ export const SubjectListItem = (props: Props) => {
         <div className="flex items-center gap-2">
           <span className="font-semibold tracking-tight text-slate-900">
             {name}
+          </span>
+          <span className="text-xs text-slate-400">
+            {new Date(created_at).toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' })}
           </span>
         </div>
         <div className="mt-1 text-sm leading-relaxed text-slate-600">
