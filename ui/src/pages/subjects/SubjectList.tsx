@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { SubjectData } from '@/types/api';
 import { SubjectListItem } from './SubjectListItem';
 
@@ -5,7 +6,7 @@ interface Props {
   subjects: SubjectData[];
 }
 
-export const SubjectList = (props: Props) => {
+export const SubjectList = memo((props: Props) => {
   const { subjects } = props;
 
   return (
@@ -19,4 +20,4 @@ export const SubjectList = (props: Props) => {
       ))}
     </div>
   );
-};
+});
