@@ -8,7 +8,7 @@ import { SignIn } from '@/pages/sign-in/SignIn';
 import { Layout } from '@/Layout';
 import { Subjects } from '@/pages/subjects/Subjects';
 import { CreateSubject } from '@/pages/create-subject/CreateSubject';
-import { SubjectDetail } from './pages/subject-detail/SubjectDetail';
+import { SubjectDetail } from '@/pages/subject-detail/SubjectDetail';
 
 function App() {
   const storageUser = sessionStorage.getItem('user');
