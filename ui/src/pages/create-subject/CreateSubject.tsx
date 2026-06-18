@@ -1,7 +1,8 @@
-import { apiPost } from '@/api';
-import type { UserData, SubjectData } from '@/types/api';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+
+import type { UserData } from '@/types/api';
+import { useCreateSubject } from '@/hooks/useCreateSubject';
 
 interface Props {
   user: UserData;
@@ -14,17 +15,16 @@ export const CreateSubject = (props: Props) => {
   const [description, setDescription] = useState('');
 
   const navigate = useNavigate();
+  const { createSubject, isLoading } = useCreateSubject();
 
-  const onSubmit = async (e: React.SubmitEvent) => {
+  const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const subject = await apiPost<SubjectData>('/api/subjects', {
-      name,
-      description,
-      user_id: user.id,
-    });
+    const subject = await createSubject(name, description, user.id);
 
-    navigate(`/subjects/${subject.id}`);
+    if (subject) {
+      navigate(`/subjects/${subject.id}`);
+    }
   };
 
   return (
@@ -42,7 +42,9 @@ export const CreateSubject = (props: Props) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <button>Create New Subject</button>
+        <button disabled={isLoading}>
+          {isLoading ? 'Creating...' : 'Create New Subject'}
+        </button>
       </form>
     </div>
   );
