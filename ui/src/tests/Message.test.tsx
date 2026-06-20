@@ -1,9 +1,11 @@
 import { test, expect } from 'vitest';
 import { render } from 'vitest-browser-react';
 import { Message } from '@/pages/chat/Message/Message';
+import type { MessageData } from '@/types/api';
 
 test('renders message data', async () => {
-  const msg = {
+  const msg: MessageData = {
+    id: 1,
     username: 'Bob',
     message: 'Hello World!',
     created_at: '2024',
