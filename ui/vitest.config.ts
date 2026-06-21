@@ -1,6 +1,5 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
-import { preview } from '@vitest/browser-preview';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
@@ -11,10 +10,7 @@ export default defineConfig({
     },
   },
   test: {
-    browser: {
-      enabled: true,
-      provider: preview(),
-      instances: [{ browser: 'chrome' }],
-    },
+    environment: 'jsdom',
+    setupFiles: ['./src/tests/setup.ts'],
   },
 });
